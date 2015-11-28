@@ -4,3 +4,7 @@ pod 'AFNetworking'
 pod 'SDWebImage'
 pod 'JSAnimatedImagesView'
 pod 'Masonry'
+pod 'ChameleonFramework'
+pod 'SDCycleScrollView'
+
+

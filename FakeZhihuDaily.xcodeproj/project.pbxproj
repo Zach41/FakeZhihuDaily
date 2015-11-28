@@ -10,9 +10,12 @@
 		924F50201C094A3C002F8F2B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 924F501F1C094A3C002F8F2B /* main.m */; };
 		924F50231C094A3C002F8F2B /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 924F50221C094A3C002F8F2B /* AppDelegate.m */; };
 		924F50261C094A3C002F8F2B /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 924F50251C094A3C002F8F2B /* ViewController.m */; };
-		924F50291C094A3C002F8F2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 924F50271C094A3C002F8F2B /* Main.storyboard */; };
 		924F502B1C094A3C002F8F2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 924F502A1C094A3C002F8F2B /* Assets.xcassets */; };
 		924F502E1C094A3C002F8F2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 924F502C1C094A3C002F8F2B /* LaunchScreen.storyboard */; };
+		924F503C1C095251002F8F2B /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 924F503B1C095251002F8F2B /* MainController.m */; };
+		924F50401C095272002F8F2B /* MainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 924F503F1C095272002F8F2B /* MainCell.m */; };
+		92B167DD1C0982DC00634428 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B167DC1C0982DC00634428 /* Main.storyboard */; };
+		92B167E21C09A22D00634428 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B167E11C09A22D00634428 /* UINavigationBar+Awesome.m */; };
 		FA82B0C09097D7868107AC44 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 702101AA370675A628B46678 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -25,10 +28,16 @@
 		924F50221C094A3C002F8F2B /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		924F50241C094A3C002F8F2B /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		924F50251C094A3C002F8F2B /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		924F50281C094A3C002F8F2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		924F502A1C094A3C002F8F2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		924F502D1C094A3C002F8F2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		924F502F1C094A3C002F8F2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		924F503A1C095251002F8F2B /* MainController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainController.h; path = Controllers/MainController/MainController.h; sourceTree = "<group>"; };
+		924F503B1C095251002F8F2B /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainController.m; path = Controllers/MainController/MainController.m; sourceTree = "<group>"; };
+		924F503E1C095272002F8F2B /* MainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainCell.h; path = Controllers/MainController/Cells/MainCell.h; sourceTree = "<group>"; };
+		924F503F1C095272002F8F2B /* MainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainCell.m; path = Controllers/MainController/Cells/MainCell.m; sourceTree = "<group>"; };
+		92B167DC1C0982DC00634428 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		92B167E01C09A22D00634428 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationBar+Awesome.h"; path = "Categories/NavigationBar(Awesome)/UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
+		92B167E11C09A22D00634428 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationBar+Awesome.m"; path = "Categories/NavigationBar(Awesome)/UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		F3EFCFA7F704151211525DA8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -73,12 +82,17 @@
 		924F501D1C094A3C002F8F2B /* FakeZhihuDaily */ = {
 			isa = PBXGroup;
 			children = (
+				92B167DE1C09A1D100634428 /* Categories */,
+				924F50381C0951CD002F8F2B /* Views */,
+				924F50371C0951B6002F8F2B /* Controllers */,
+				924F50361C0951AE002F8F2B /* Models */,
+				924F50351C09519E002F8F2B /* Common */,
 				924F50211C094A3C002F8F2B /* AppDelegate.h */,
 				924F50221C094A3C002F8F2B /* AppDelegate.m */,
 				924F50241C094A3C002F8F2B /* ViewController.h */,
 				924F50251C094A3C002F8F2B /* ViewController.m */,
-				924F50271C094A3C002F8F2B /* Main.storyboard */,
 				924F502A1C094A3C002F8F2B /* Assets.xcassets */,
+				92B167DC1C0982DC00634428 /* Main.storyboard */,
 				924F502C1C094A3C002F8F2B /* LaunchScreen.storyboard */,
 				924F502F1C094A3C002F8F2B /* Info.plist */,
 				924F501E1C094A3C002F8F2B /* Supporting Files */,
@@ -92,6 +106,71 @@
 				924F501F1C094A3C002F8F2B /* main.m */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		924F50351C09519E002F8F2B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		924F50361C0951AE002F8F2B /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+		924F50371C0951B6002F8F2B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				924F50391C0951F8002F8F2B /* MainController */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		924F50381C0951CD002F8F2B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		924F50391C0951F8002F8F2B /* MainController */ = {
+			isa = PBXGroup;
+			children = (
+				924F503D1C095254002F8F2B /* Cells */,
+				924F503A1C095251002F8F2B /* MainController.h */,
+				924F503B1C095251002F8F2B /* MainController.m */,
+			);
+			name = MainController;
+			sourceTree = "<group>";
+		};
+		924F503D1C095254002F8F2B /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				924F503E1C095272002F8F2B /* MainCell.h */,
+				924F503F1C095272002F8F2B /* MainCell.m */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		92B167DE1C09A1D100634428 /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				92B167DF1C09A1E700634428 /* NavigationBar(Awesome) */,
+			);
+			name = Categories;
+			sourceTree = "<group>";
+		};
+		92B167DF1C09A1E700634428 /* NavigationBar(Awesome) */ = {
+			isa = PBXGroup;
+			children = (
+				92B167E01C09A22D00634428 /* UINavigationBar+Awesome.h */,
+				92B167E11C09A22D00634428 /* UINavigationBar+Awesome.m */,
+			);
+			name = "NavigationBar(Awesome)";
 			sourceTree = "<group>";
 		};
 		A9E649A4CBACE49C050ADBA0 /* Pods */ = {
@@ -164,9 +243,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92B167DD1C0982DC00634428 /* Main.storyboard in Resources */,
 				924F502E1C094A3C002F8F2B /* LaunchScreen.storyboard in Resources */,
 				924F502B1C094A3C002F8F2B /* Assets.xcassets in Resources */,
-				924F50291C094A3C002F8F2B /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -225,6 +304,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				924F50401C095272002F8F2B /* MainCell.m in Sources */,
+				92B167E21C09A22D00634428 /* UINavigationBar+Awesome.m in Sources */,
+				924F503C1C095251002F8F2B /* MainController.m in Sources */,
 				924F50261C094A3C002F8F2B /* ViewController.m in Sources */,
 				924F50231C094A3C002F8F2B /* AppDelegate.m in Sources */,
 				924F50201C094A3C002F8F2B /* main.m in Sources */,
@@ -234,14 +316,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		924F50271C094A3C002F8F2B /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				924F50281C094A3C002F8F2B /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		924F502C1C094A3C002F8F2B /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
