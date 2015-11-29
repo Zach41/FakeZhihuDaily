@@ -11,10 +11,11 @@
 #import "MainController.h"
 #import "MainCell.h"
 #import "UINavigationBar+Awesome.h"
+#import "ParallaxHeaderView.h"
 
 static NSString * const kMainCellID = @"MainCell";
 
-@interface MainController () <SDCycleScrollViewDelegate>
+@interface MainController () <SDCycleScrollViewDelegate, ParallaxHeaderViewDelegate>
 
 @end
 
@@ -34,11 +35,13 @@ static NSString * const kMainCellID = @"MainCell";
                             [UIImage imageNamed:@"test_scroll_image"],
                             [UIImage imageNamed:@"test_scroll_image"]];
     
-    SDCycleScrollView *headerScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 200.f) imagesGroup:imageGroup];
+    SDCycleScrollView *headerScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 154.f) imagesGroup:imageGroup];
     headerScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
     headerScrollView.delegate = self;
-    self.tableView.tableHeaderView = headerScrollView;
-    self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
+    ParallaxHeaderView *parallaxHeader = [ParallaxHeaderView parallaxHeaderWithSubView:headerScrollView forSize:headerScrollView.frame.size];
+    parallaxHeader.delegate = self;
+    
+    self.tableView.tableHeaderView = parallaxHeader;
     
     // 设置导航栏
     self.title = @"今日热文";
@@ -49,6 +52,12 @@ static NSString * const kMainCellID = @"MainCell";
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [(ParallaxHeaderView *)self.tableView.tableHeaderView refreshBlurredImage];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -80,13 +89,19 @@ static NSString * const kMainCellID = @"MainCell";
 
 #pragma mark - UITableView Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
+    ParallaxHeaderView *headerView = (ParallaxHeaderView *)self.tableView.tableHeaderView;
+    
+    NSLog(@"Offset : %@", NSStringFromCGPoint(scrollView.contentOffset));
+    
+    [headerView layoutParallaxHeaderViewForScrollViewOffset:scrollView.contentOffset];
+    
     UIColor *color = [UIColor colorWithRed:1/255.0 green:131/255.0 blue:209/255.0 alpha:1.0];
     
     CGFloat prelude = 90.f;
     CGFloat offsetY = scrollView.contentOffset.y;
     
-    if (offsetY>=0) {
-        CGFloat alpha = MIN(1, (offsetY) / (64+prelude));
+    if (offsetY>=-64) {
+        CGFloat alpha = MIN(1, (offsetY+64) / (64+prelude));
         [self.navigationController.navigationBar lt_setBackgourndColor:[color colorWithAlphaComponent:alpha]];
     } else {
         [self.navigationController.navigationBar lt_setBackgourndColor:[UIColor clearColor]];
@@ -95,5 +110,10 @@ static NSString * const kMainCellID = @"MainCell";
 #pragma mark - SDCycleImageView Delegate
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     NSLog(@"第%ld张图片被点击了.", (long)index);
+}
+
+#pragma mark - ParallaxHeader Delegate
+- (void)lockDirection {
+    [self.tableView scrollsToTop];
 }
 @end

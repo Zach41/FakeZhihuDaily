@@ -40,7 +40,7 @@
         
         self.tagLabel = [UILabel new];
         _tagLabel.textColor = [UIColor flatWhiteColor];
-        _tagLabel.font = [UIFont systemFontOfSize:7.f];
+        _tagLabel.font = [UIFont systemFontOfSize:9.f];
         _tagLabel.backgroundColor = [UIColor flatGrayColor];
         _tagLabel.alpha = 0.8;
         _tagLabel.textAlignment = NSTextAlignmentCenter;
@@ -48,7 +48,7 @@
         
         self.titleLabel = [UILabel new];
         _titleLabel.textColor = [UIColor blackColor];
-        _titleLabel.font = [UIFont boldSystemFontOfSize:12.f];
+        _titleLabel.font = [UIFont boldSystemFontOfSize:15.f];
         _titleLabel.numberOfLines = 0;
         [self.contentView addSubview:_titleLabel];
         
@@ -79,7 +79,7 @@
     
     [_titleImageView mas_makeConstraints:^(MASConstraintMaker *make) {
         make.width.equalTo(@80);
-        make.height.equalTo(@60);
+        make.height.equalTo(@70);
         
         make.top.equalTo(@(marginLength));
         make.right.equalTo(self.contentView).with.offset(-marginLength);
@@ -89,8 +89,8 @@
     [_tagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(_titleImageView);
         make.bottom.equalTo(_titleImageView);
-        make.width.equalTo(@20);
-        make.height.equalTo(@10);
+        make.width.equalTo(@30);
+        make.height.equalTo(@15);
     }];
     
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
