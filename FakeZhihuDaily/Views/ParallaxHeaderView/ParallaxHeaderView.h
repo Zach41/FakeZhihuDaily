@@ -20,8 +20,10 @@
 
 + (id)parallaxHeaderWithSubView:(UIView *)subView forSize:(CGSize)size;
 
++ (id)parallaxThemeHeaderWithSubview:(UIView *)subview image:(UIImage *)image forSize:(CGSize)size;
+
 - (void)layoutParallaxHeaderViewForScrollViewOffset:(CGPoint)offset;
 
-- (void)refreshBlurredImage;
+- (void)layoutParallaxThemeHeaderForScrollViewOffset:(CGPoint)offset;
 
 @end

@@ -13,13 +13,15 @@
 #define kHeaderSize self.frame.size
 
 const CGFloat kParallaxDeltaFactor  = 0.5;
-const CGFloat kParallaxDeltaValue   = -63;
+const CGFloat kParallaxDeltaValue   = -63.0;
+const CGFloat kParallaxThemeDelta   = -95.0;
 
 @interface ParallaxHeaderView ()
 
 @property (nonatomic, strong) UIScrollView  *scrollView;
 @property (nonatomic, strong) UIView        *subview;
-@property (nonatomic, strong) UIImageView   *blureImageView;
+@property (nonatomic, strong) UIImageView   *bluredImageView;
+@property (nonatomic, strong) UIImage       *blurImage;
 
 @end
 
@@ -30,6 +32,15 @@ const CGFloat kParallaxDeltaValue   = -63;
     ParallaxHeaderView *headerView = [[ParallaxHeaderView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
     
     [headerView initialSetupForCustomSubview:subview];
+    return headerView;
+}
+
++ (id)parallaxThemeHeaderWithSubview:(UIView *)subview image:(UIImage *)image forSize:(CGSize)size {
+    ParallaxHeaderView *headerView = [[ParallaxHeaderView alloc] initWithFrame:CGRectMake(0, 0, size.width, size.height)];
+    
+    headerView.blurImage = [image applyBlurWithRadius:5.0 tintColor:[UIColor clearColor] saturationDeltaFactor:1.0 maskImage:nil];
+    [headerView initialSetupForThemeCustomSubview:subview];
+    
     return headerView;
 }
 
@@ -47,39 +58,59 @@ const CGFloat kParallaxDeltaValue   = -63;
     }
 }
 
-- (void)refreshBlurredImage {
-    UIImage *screenShot = [self screenShotOfView];
-    screenShot = [screenShot applyBlurWithRadius:5.0 tintColor:[UIColor colorWithWhite:0.6 alpha:0.2] saturationDeltaFactor:1.0 maskImage:nil];
-    self.blureImageView.image = screenShot;
+- (void)layoutParallaxThemeHeaderForScrollViewOffset:(CGPoint)offset {
+    CGRect frame = _scrollView.frame;
+    
+    if (offset.y > 0) {
+        frame.origin.y = offset.y;
+        _scrollView.frame = frame;
+        self.clipsToBounds = NO;
+    } else if (offset.y<kParallaxThemeDelta){
+        [self.delegate lockDirection];
+    } else {
+        CGRect rect = CGRectMake(0, 0, kHeaderSize.width, kHeaderSize.height);
+        
+        CGFloat delta = offset.y;
+        
+        rect.origin.y += delta;
+        rect.size.height -= delta;
+        
+        _scrollView.frame = rect;
+        
+        _bluredImageView.alpha = (-kParallaxThemeDelta+offset.y) / 75;
+        
+        self.clipsToBounds = NO;
+    }
 }
 
 #pragma mark - Private
 
-- (void)initialSetupForCustomSubview:(UIView *)subview{
+- (void)commonInitialSetupForSubview:(UIView *)subview {
     self.scrollView = [[UIScrollView alloc] initWithFrame:self.bounds];
-    
     _scrollView.backgroundColor = [UIColor whiteColor];
     subview.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
     self.subview = subview;
     
     [self.scrollView addSubview:subview];
-    
-    self.blureImageView = [[UIImageView alloc] initWithFrame:subview.bounds];
-    _blureImageView.autoresizingMask = subview.autoresizingMask;
-    _blureImageView.alpha = 0.0f;
-    [self.scrollView addSubview:_blureImageView];
-    
-    [self addSubview:self.scrollView];
-    
-    [self refreshBlurredImage];
 }
 
-- (UIImage *)screenShotOfView{
-    UIGraphicsBeginImageContextWithOptions(kHeaderSize, YES, 0.0);
-    [self drawViewHierarchyInRect:CGRectMake(0, 0, kHeaderSize.width, kHeaderSize.height) afterScreenUpdates:NO];
-    UIImage *image = UIGraphicsGetImageFromCurrentImageContext();
-    UIGraphicsEndImageContext();
+- (void)initialSetupForCustomSubview:(UIView *)subview{
+    [self commonInitialSetupForSubview:subview];
     
-    return image;
+    [self addSubview:_scrollView];
 }
+
+- (void)initialSetupForThemeCustomSubview:(UIView *)subview {
+    [self commonInitialSetupForSubview:subview];
+    
+    self.bluredImageView = [[UIImageView alloc] initWithFrame:subview.frame];
+    _bluredImageView.autoresizingMask = subview.autoresizingMask;
+    _bluredImageView.alpha = 1.0f;
+    _bluredImageView.image = _blurImage;
+    _bluredImageView.contentMode = UIViewContentModeScaleAspectFill;
+    [self.scrollView addSubview:_bluredImageView];
+    
+    [self addSubview:_scrollView];
+}
+
 @end

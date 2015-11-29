@@ -6,5 +6,5 @@ pod 'JSAnimatedImagesView'
 pod 'Masonry'
 pod 'ChameleonFramework'
 pod 'SDCycleScrollView'
-
+pod 'BlocksKit'
 

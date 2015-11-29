@@ -12,6 +12,8 @@
 #import "MainCell.h"
 #import "UINavigationBar+Awesome.h"
 #import "ParallaxHeaderView.h"
+// TODO: 删除include项
+#import "ThemeController.h"
 
 static NSString * const kMainCellID = @"MainCell";
 
@@ -48,6 +50,10 @@ static NSString * const kMainCellID = @"MainCell";
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
     [self.navigationController.navigationBar lt_setBackgourndColor:[UIColor clearColor]];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
+    
+    UIBarButtonItem *leftBarBtn = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarButtonAction:)];
+    leftBarBtn.tintColor = [UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem = leftBarBtn;
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -56,8 +62,6 @@ static NSString * const kMainCellID = @"MainCell";
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
-    
-    [(ParallaxHeaderView *)self.tableView.tableHeaderView refreshBlurredImage];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -91,8 +95,6 @@ static NSString * const kMainCellID = @"MainCell";
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     ParallaxHeaderView *headerView = (ParallaxHeaderView *)self.tableView.tableHeaderView;
     
-    NSLog(@"Offset : %@", NSStringFromCGPoint(scrollView.contentOffset));
-    
     [headerView layoutParallaxHeaderViewForScrollViewOffset:scrollView.contentOffset];
     
     UIColor *color = [UIColor colorWithRed:1/255.0 green:131/255.0 blue:209/255.0 alpha:1.0];
@@ -115,5 +117,12 @@ static NSString * const kMainCellID = @"MainCell";
 #pragma mark - ParallaxHeader Delegate
 - (void)lockDirection {
     [self.tableView scrollsToTop];
+}
+
+#pragma mark - Button targets
+- (void)leftBarButtonAction:(UIBarButtonItem *)item {
+    // FIXME : 将测试的代码删除
+    ThemeController *themController = [[ThemeController alloc] initWithStyle:UITableViewStylePlain];
+    [self.navigationController pushViewController:themController animated:YES];
 }
 @end

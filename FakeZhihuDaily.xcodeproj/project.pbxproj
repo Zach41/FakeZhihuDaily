@@ -16,6 +16,7 @@
 		924F50401C095272002F8F2B /* MainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 924F503F1C095272002F8F2B /* MainCell.m */; };
 		927CD8A61C0AD84E00DACA4E /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 927CD8A51C0AD84E00DACA4E /* ParallaxHeaderView.m */; };
 		927CD8AA1C0AED5100DACA4E /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 927CD8A91C0AED5100DACA4E /* UIImage+ImageEffects.m */; };
+		928D32F71C0B341A00E77923 /* ThemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928D32F61C0B341A00E77923 /* ThemeController.m */; };
 		92B167DD1C0982DC00634428 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B167DC1C0982DC00634428 /* Main.storyboard */; };
 		92B167E21C09A22D00634428 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B167E11C09A22D00634428 /* UINavigationBar+Awesome.m */; };
 		FA82B0C09097D7868107AC44 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 702101AA370675A628B46678 /* libPods.a */; };
@@ -41,6 +42,8 @@
 		927CD8A51C0AD84E00DACA4E /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParallaxHeaderView.m; path = Views/ParallaxHeaderView/ParallaxHeaderView.m; sourceTree = "<group>"; };
 		927CD8A81C0AED5100DACA4E /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "Categories/UIImage(Effects)/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		927CD8A91C0AED5100DACA4E /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "Categories/UIImage(Effects)/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		928D32F51C0B341A00E77923 /* ThemeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeController.h; path = Controllers/ThemeController/ThemeController.h; sourceTree = "<group>"; };
+		928D32F61C0B341A00E77923 /* ThemeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeController.m; path = Controllers/ThemeController/ThemeController.m; sourceTree = "<group>"; };
 		92B167DC1C0982DC00634428 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		92B167E01C09A22D00634428 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationBar+Awesome.h"; path = "Categories/NavigationBar(Awesome)/UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
 		92B167E11C09A22D00634428 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationBar+Awesome.m"; path = "Categories/NavigationBar(Awesome)/UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
@@ -131,6 +134,7 @@
 		924F50371C0951B6002F8F2B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				928D32F41C0B33DC00E77923 /* ThemeController */,
 				924F50391C0951F8002F8F2B /* MainController */,
 			);
 			name = Controllers;
@@ -179,6 +183,15 @@
 				927CD8A91C0AED5100DACA4E /* UIImage+ImageEffects.m */,
 			);
 			name = "UIImage(Effects)";
+			sourceTree = "<group>";
+		};
+		928D32F41C0B33DC00E77923 /* ThemeController */ = {
+			isa = PBXGroup;
+			children = (
+				928D32F51C0B341A00E77923 /* ThemeController.h */,
+				928D32F61C0B341A00E77923 /* ThemeController.m */,
+			);
+			name = ThemeController;
 			sourceTree = "<group>";
 		};
 		92B167DE1C09A1D100634428 /* Categories */ = {
@@ -330,6 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				928D32F71C0B341A00E77923 /* ThemeController.m in Sources */,
 				927CD8AA1C0AED5100DACA4E /* UIImage+ImageEffects.m in Sources */,
 				924F50401C095272002F8F2B /* MainCell.m in Sources */,
 				92B167E21C09A22D00634428 /* UINavigationBar+Awesome.m in Sources */,
