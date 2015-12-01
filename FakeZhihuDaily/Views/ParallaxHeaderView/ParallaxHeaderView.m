@@ -13,7 +13,7 @@
 #define kHeaderSize self.frame.size
 
 const CGFloat kParallaxDeltaFactor  = 0.5;
-const CGFloat kParallaxDeltaValue   = -63.0;
+const CGFloat kParallaxDeltaValue   = -90;
 const CGFloat kParallaxThemeDelta   = -95.0;
 
 @interface ParallaxHeaderView ()
@@ -45,7 +45,11 @@ const CGFloat kParallaxThemeDelta   = -95.0;
 }
 
 - (void)layoutParallaxHeaderViewForScrollViewOffset:(CGPoint)offset {
-    if (offset.y<kParallaxDeltaValue){
+    if (offset.y<kParallaxDeltaValue) {
+        [self.delegate lockDirection];
+        return;
+    }
+    if (offset.y<1){
         CGFloat delta =offset.y;
         
         CGRect rect = CGRectMake(0, 0, kHeaderSize.width, kHeaderSize.height);

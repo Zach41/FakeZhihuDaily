@@ -6,8 +6,11 @@
 //  Copyright © 2015年 ZachZhang. All rights reserved.
 //
 
+#import <MMDrawerController.h>
+
 #import "AppDelegate.h"
 #import "MainController.h"
+#import "ThemeMenuController.h"
 
 @interface AppDelegate ()
 
@@ -18,11 +21,25 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    UIWindow *window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
-    MainController *main = [[MainController alloc] init];
-    window.rootViewController = main;
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
-    [window makeKeyAndVisible];
+    MainController *main = [[MainController alloc] initWithStyle:UITableViewStylePlain];
+    UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:main];
+    
+    ThemeMenuController *menuController = [[ThemeMenuController alloc] init];
+//    UINavigationController *menuNav = [[UINavigationController alloc] initWithRootViewController:menuController];
+    
+    MMDrawerController *rootViewController = [[MMDrawerController alloc] initWithCenterViewController:mainNav leftDrawerViewController:menuController];
+    
+    [rootViewController setShowsShadow:NO];
+    [rootViewController setMaximumLeftDrawerWidth:200.f];
+    [rootViewController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+    [rootViewController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
+    rootViewController.shouldStretchDrawer = NO;
+//    rootViewController.
+    self.window.rootViewController = rootViewController;
+    
+    [self.window makeKeyAndVisible];
     return YES;
 }
 

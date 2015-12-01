@@ -7,13 +7,12 @@
 //
 
 #import <SDCycleScrollView.h>
+#import <UIViewController+MMDrawerController.h>
 
 #import "MainController.h"
 #import "MainCell.h"
 #import "UINavigationBar+Awesome.h"
 #import "ParallaxHeaderView.h"
-// TODO: 删除include项
-#import "ThemeController.h"
 
 static NSString * const kMainCellID = @"MainCell";
 
@@ -37,13 +36,20 @@ static NSString * const kMainCellID = @"MainCell";
                             [UIImage imageNamed:@"test_scroll_image"],
                             [UIImage imageNamed:@"test_scroll_image"]];
     
-    SDCycleScrollView *headerScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 154.f) imagesGroup:imageGroup];
+    SDCycleScrollView *headerScrollView = [SDCycleScrollView cycleScrollViewWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 214.f) imagesGroup:imageGroup];
+    headerScrollView.titlesGroup = @[@"这是一张测试图片哦哦哦哦哦",
+                                     @"这是一张测试图片哦哦哦哦哦",
+                                     @"这是一张测试图片哦哦哦哦哦这是一张测试图片哦哦哦哦哦这是一张测试图片哦哦哦哦哦"];
+    headerScrollView.titleLabelBackgroundColor = [UIColor clearColor];
+    headerScrollView.titleLabelTextFont = [UIFont boldSystemFontOfSize:19.f];
+    headerScrollView.titleLabelHeight = 60.f;
     headerScrollView.pageControlStyle = SDCycleScrollViewPageContolStyleClassic;
     headerScrollView.delegate = self;
     ParallaxHeaderView *parallaxHeader = [ParallaxHeaderView parallaxHeaderWithSubView:headerScrollView forSize:headerScrollView.frame.size];
     parallaxHeader.delegate = self;
     
     self.tableView.tableHeaderView = parallaxHeader;
+    self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
     
     // 设置导航栏
     self.title = @"今日热文";
@@ -99,11 +105,11 @@ static NSString * const kMainCellID = @"MainCell";
     
     UIColor *color = [UIColor colorWithRed:1/255.0 green:131/255.0 blue:209/255.0 alpha:1.0];
     
-    CGFloat prelude = 90.f;
+    CGFloat prelude = 150.f;
     CGFloat offsetY = scrollView.contentOffset.y;
     
-    if (offsetY>=-64) {
-        CGFloat alpha = MIN(1, (offsetY+64) / (64+prelude));
+    if (offsetY>=0) {
+        CGFloat alpha = MIN(1, (offsetY) / (prelude));
         [self.navigationController.navigationBar lt_setBackgourndColor:[color colorWithAlphaComponent:alpha]];
     } else {
         [self.navigationController.navigationBar lt_setBackgourndColor:[UIColor clearColor]];
@@ -116,13 +122,14 @@ static NSString * const kMainCellID = @"MainCell";
 
 #pragma mark - ParallaxHeader Delegate
 - (void)lockDirection {
-    [self.tableView scrollsToTop];
+    CGPoint offset = self.tableView.contentOffset;
+    [self.tableView setContentOffset:CGPointMake(offset.x, -90) animated:NO];
+    [self.tableView setContentOffset:CGPointMake(offset.x, 0) animated:YES];
 }
 
 #pragma mark - Button targets
 - (void)leftBarButtonAction:(UIBarButtonItem *)item {
     // FIXME : 将测试的代码删除
-    ThemeController *themController = [[ThemeController alloc] initWithStyle:UITableViewStylePlain];
-    [self.navigationController pushViewController:themController animated:YES];
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 @end
