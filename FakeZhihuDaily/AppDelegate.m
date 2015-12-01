@@ -32,7 +32,7 @@
     MMDrawerController *rootViewController = [[MMDrawerController alloc] initWithCenterViewController:mainNav leftDrawerViewController:menuController];
     
     [rootViewController setShowsShadow:NO];
-    [rootViewController setMaximumLeftDrawerWidth:200.f];
+    [rootViewController setMaximumLeftDrawerWidth:220.f];
     [rootViewController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [rootViewController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     rootViewController.shouldStretchDrawer = NO;

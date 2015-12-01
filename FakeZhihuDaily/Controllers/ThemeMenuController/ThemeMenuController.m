@@ -32,7 +32,6 @@
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.showsVerticalScrollIndicator = NO;
     _tableView.backgroundColor = [UIColor flatBlackColor];
-//    _tableView.
     _tableView.delegate = self;
     _tableView.dataSource = self;
     
@@ -41,6 +40,17 @@
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.headerView];
     // TODO: 设置头像昵称和各个点击时间
+    _headerView.action = ^(NSInteger index) {
+        if (index == 0) {
+            NSLog(@"收藏按钮.");
+        }
+        if (index == 1) {
+            NSLog(@"消息按钮");
+        }
+        if (index == 2) {
+            NSLog(@"设置按钮");
+        }
+    };
     
     self.view.backgroundColor = [UIColor flatBlackColor];
 }
@@ -92,7 +102,7 @@
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
     UIView *selectedView = [[UIView alloc] initWithFrame:cell.contentView.frame];
-    selectedView.backgroundColor = [UIColor colorWithRed:12/255.0 green:19/255.0 blue:25/255.0 alpha:0.5];
+    selectedView.backgroundColor = [UIColor colorWithRed:12/255.0 green:19/255.0 blue:25/255.0 alpha:0.3];
     cell.selectedBackgroundView = selectedView;
     
     return cell;

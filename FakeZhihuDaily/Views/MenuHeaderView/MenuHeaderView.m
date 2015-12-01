@@ -13,9 +13,9 @@
 #import "MenuHeaderView.h"
 #import "TitleImageView.h"
 
-const CGFloat kAvatarWidth = 40.f;
-const CGFloat kIconWidth   = 30.f;
-const CGFloat kIconHeight  = 47.f;
+const CGFloat kAvatarWidth = 50.f;
+const CGFloat kIconWidth   = 24.f;
+const CGFloat kIconHeight  = 45.f;
 
 @interface MenuHeaderView ()
 
@@ -45,9 +45,9 @@ const CGFloat kIconHeight  = 47.f;
         _nicknameLabel.textAlignment = NSTextAlignmentLeft;
         [self addSubview:_nicknameLabel];
         
-        [self initTitleImageWithImageName:@"home" title:@"收藏"];
-        [self initTitleImageWithImageName:@"home" title:@"消息"];
-        [self initTitleImageWithImageName:@"home" title:@"设置"];
+        [self initTitleImageWithImageName:@"favor" title:@"收藏"];
+        [self initTitleImageWithImageName:@"message" title:@"消息"];
+        [self initTitleImageWithImageName:@"settting" title:@"设置"];
         
         // TODO: 删除测试代码
         [self setupTest];
@@ -73,7 +73,7 @@ const CGFloat kIconHeight  = 47.f;
         make.left.equalTo(@15);
         make.top.equalTo(_avatarView.mas_bottom).with.offset(20);
         make.width.equalTo(@(kIconWidth));
-//        make.height.equalTo(@(kIconHeight));
+        make.height.equalTo(@(kIconHeight));
     }];
     
     [_messagesView mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -99,20 +99,26 @@ const CGFloat kIconHeight  = 47.f;
     
     if ([title isEqualToString:@"收藏"]) {
         self.favorsView = titleView;
-        if (self.action) {
-            self.action(0);
-        }
     } else if ([title isEqualToString:@"消息"]) {
         self.messagesView = titleView;
-        if (self.action) {
-            self.action(1);
-        }
     } else {
         self.settingsView = titleView;
-        if (self.action) {
+    }
+    
+    [titleView bk_whenTapped:^{
+        if (self.action == nil) {
+            return;
+        }
+        if ([title isEqualToString:@"收藏"]) {
+            self.action(0);
+        }
+        if ([title isEqualToString:@"消息"]) {
+            self.action(1);
+        }
+        if ([title isEqualToString:@"设置"]) {
             self.action(2);
         }
-    }
+    }];
     
     [self addSubview:titleView];
 }

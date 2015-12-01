@@ -37,16 +37,16 @@
 
 - (void)layoutSubviews {
     [_imageView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.height.equalTo(@30);
-        make.left.equalTo(self.mas_left);
-        make.right.equalTo(self.mas_right);
+        make.height.equalTo(@18);
+        make.width.equalTo(@18);
         make.top.equalTo(self.mas_top);
+        make.centerX.equalTo(self);
     }];
     
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self.mas_left);
         make.right.equalTo(self.mas_right);
-        make.top.equalTo(_imageView.mas_bottom).with.offset(2);
+        make.top.equalTo(_imageView.mas_bottom).with.offset(8);
         make.height.equalTo(@13);
     }];
 }
