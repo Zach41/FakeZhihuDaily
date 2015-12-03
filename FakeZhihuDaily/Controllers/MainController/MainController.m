@@ -13,6 +13,7 @@
 #import "MainCell.h"
 #import "UINavigationBar+Awesome.h"
 #import "ParallaxHeaderView.h"
+#import "ContentBottomBar.h"
 
 static NSString * const kMainCellID = @"MainCell";
 

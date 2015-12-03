@@ -31,7 +31,16 @@ const CGFloat kIconHeight  = 45.f;
     self = [super initWithFrame:frame];
     
     if (self) {
-        self.backgroundColor = [UIColor clearColor];
+        // 添加阴影
+        UIBezierPath *shadowPath = [UIBezierPath bezierPathWithRect:self.bounds];
+        self.layer.shadowOffset = CGSizeMake(0, 1.1);
+        self.layer.shadowOpacity = 0.2f;
+        self.layer.shadowPath = shadowPath.CGPath;
+        self.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.layer.shadowRadius = 1.f;
+        self.clipsToBounds = NO;
+        
+        self.backgroundColor = [UIColor flatBlackColor];
         self.avatarView = [UIImageView new];
         _avatarView.contentMode = UIViewContentModeScaleAspectFill;
         _avatarView.layer.cornerRadius = kAvatarWidth / 2;

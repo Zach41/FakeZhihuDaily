@@ -14,8 +14,12 @@
 		924F502E1C094A3C002F8F2B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 924F502C1C094A3C002F8F2B /* LaunchScreen.storyboard */; };
 		924F503C1C095251002F8F2B /* MainController.m in Sources */ = {isa = PBXBuildFile; fileRef = 924F503B1C095251002F8F2B /* MainController.m */; };
 		924F50401C095272002F8F2B /* MainCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 924F503F1C095272002F8F2B /* MainCell.m */; };
+		925D36B81C0EE713000F5FDF /* UIButton+Badge.m in Sources */ = {isa = PBXBuildFile; fileRef = 925D36B71C0EE713000F5FDF /* UIButton+Badge.m */; };
 		927CD8A61C0AD84E00DACA4E /* ParallaxHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 927CD8A51C0AD84E00DACA4E /* ParallaxHeaderView.m */; };
 		927CD8AA1C0AED5100DACA4E /* UIImage+ImageEffects.m in Sources */ = {isa = PBXBuildFile; fileRef = 927CD8A91C0AED5100DACA4E /* UIImage+ImageEffects.m */; };
+		928BF4761C0FE4E6006172C9 /* ContentBottomBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 928BF4751C0FE4E6006172C9 /* ContentBottomBar.m */; };
+		928BF4791C1022F2006172C9 /* ContentController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928BF4781C1022F2006172C9 /* ContentController.m */; };
+		928BF47D1C106355006172C9 /* ContentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 928BF47C1C106355006172C9 /* ContentHeaderView.m */; };
 		928D32F71C0B341A00E77923 /* ThemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928D32F61C0B341A00E77923 /* ThemeController.m */; };
 		92A165171C0C86800053B4F5 /* ThemeMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A165161C0C86800053B4F5 /* ThemeMenuController.m */; };
 		92B167E21C09A22D00634428 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B167E11C09A22D00634428 /* UINavigationBar+Awesome.m */; };
@@ -40,10 +44,18 @@
 		924F503B1C095251002F8F2B /* MainController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainController.m; path = Controllers/MainController/MainController.m; sourceTree = "<group>"; };
 		924F503E1C095272002F8F2B /* MainCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MainCell.h; path = Controllers/MainController/Cells/MainCell.h; sourceTree = "<group>"; };
 		924F503F1C095272002F8F2B /* MainCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MainCell.m; path = Controllers/MainController/Cells/MainCell.m; sourceTree = "<group>"; };
+		925D36B61C0EE713000F5FDF /* UIButton+Badge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIButton+Badge.h"; path = "Categories/UIButton(Badge)/UIButton+Badge.h"; sourceTree = "<group>"; };
+		925D36B71C0EE713000F5FDF /* UIButton+Badge.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIButton+Badge.m"; path = "Categories/UIButton(Badge)/UIButton+Badge.m"; sourceTree = "<group>"; };
 		927CD8A41C0AD84E00DACA4E /* ParallaxHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ParallaxHeaderView.h; path = Views/ParallaxHeaderView/ParallaxHeaderView.h; sourceTree = "<group>"; };
 		927CD8A51C0AD84E00DACA4E /* ParallaxHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ParallaxHeaderView.m; path = Views/ParallaxHeaderView/ParallaxHeaderView.m; sourceTree = "<group>"; };
 		927CD8A81C0AED5100DACA4E /* UIImage+ImageEffects.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UIImage+ImageEffects.h"; path = "Categories/UIImage(Effects)/UIImage+ImageEffects.h"; sourceTree = "<group>"; };
 		927CD8A91C0AED5100DACA4E /* UIImage+ImageEffects.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UIImage+ImageEffects.m"; path = "Categories/UIImage(Effects)/UIImage+ImageEffects.m"; sourceTree = "<group>"; };
+		928BF4741C0FE4E6006172C9 /* ContentBottomBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentBottomBar.h; path = Views/ContentBottomBar/ContentBottomBar.h; sourceTree = "<group>"; };
+		928BF4751C0FE4E6006172C9 /* ContentBottomBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentBottomBar.m; path = Views/ContentBottomBar/ContentBottomBar.m; sourceTree = "<group>"; };
+		928BF4771C1022F2006172C9 /* ContentController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentController.h; path = Controllers/ContentController/ContentController.h; sourceTree = "<group>"; };
+		928BF4781C1022F2006172C9 /* ContentController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentController.m; path = Controllers/ContentController/ContentController.m; sourceTree = "<group>"; };
+		928BF47B1C106355006172C9 /* ContentHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ContentHeaderView.h; path = Views/ContentHeaderView/ContentHeaderView.h; sourceTree = "<group>"; };
+		928BF47C1C106355006172C9 /* ContentHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ContentHeaderView.m; path = Views/ContentHeaderView/ContentHeaderView.m; sourceTree = "<group>"; };
 		928D32F51C0B341A00E77923 /* ThemeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeController.h; path = Controllers/ThemeController/ThemeController.h; sourceTree = "<group>"; };
 		928D32F61C0B341A00E77923 /* ThemeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeController.m; path = Controllers/ThemeController/ThemeController.m; sourceTree = "<group>"; };
 		92A165151C0C86800053B4F5 /* ThemeMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeMenuController.h; path = Controllers/ThemeMenuController/ThemeMenuController.h; sourceTree = "<group>"; };
@@ -140,6 +152,7 @@
 		924F50371C0951B6002F8F2B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				925D36AE1C0EDB0F000F5FDF /* ContentController */,
 				92A165141C0C85AE0053B4F5 /* ThemeMenuController */,
 				928D32F41C0B33DC00E77923 /* ThemeController */,
 				924F50391C0951F8002F8F2B /* MainController */,
@@ -150,6 +163,8 @@
 		924F50381C0951CD002F8F2B /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				928BF47A1C106338006172C9 /* ContentHeaderView */,
+				925D36AF1C0EDF78000F5FDF /* ContentBottomBar */,
 				92C07F3E1C0DB91200339576 /* MenuHeaderView */,
 				927CD8A31C0AD83300DACA4E /* ParallaxHeaderView */,
 			);
@@ -175,6 +190,33 @@
 			name = Cells;
 			sourceTree = "<group>";
 		};
+		925D36AE1C0EDB0F000F5FDF /* ContentController */ = {
+			isa = PBXGroup;
+			children = (
+				928BF4771C1022F2006172C9 /* ContentController.h */,
+				928BF4781C1022F2006172C9 /* ContentController.m */,
+			);
+			name = ContentController;
+			sourceTree = "<group>";
+		};
+		925D36AF1C0EDF78000F5FDF /* ContentBottomBar */ = {
+			isa = PBXGroup;
+			children = (
+				928BF4741C0FE4E6006172C9 /* ContentBottomBar.h */,
+				928BF4751C0FE4E6006172C9 /* ContentBottomBar.m */,
+			);
+			name = ContentBottomBar;
+			sourceTree = "<group>";
+		};
+		925D36B51C0EE6F9000F5FDF /* UIButton+Badge */ = {
+			isa = PBXGroup;
+			children = (
+				925D36B61C0EE713000F5FDF /* UIButton+Badge.h */,
+				925D36B71C0EE713000F5FDF /* UIButton+Badge.m */,
+			);
+			name = "UIButton+Badge";
+			sourceTree = "<group>";
+		};
 		927CD8A31C0AD83300DACA4E /* ParallaxHeaderView */ = {
 			isa = PBXGroup;
 			children = (
@@ -191,6 +233,15 @@
 				927CD8A91C0AED5100DACA4E /* UIImage+ImageEffects.m */,
 			);
 			name = "UIImage(Effects)";
+			sourceTree = "<group>";
+		};
+		928BF47A1C106338006172C9 /* ContentHeaderView */ = {
+			isa = PBXGroup;
+			children = (
+				928BF47B1C106355006172C9 /* ContentHeaderView.h */,
+				928BF47C1C106355006172C9 /* ContentHeaderView.m */,
+			);
+			name = ContentHeaderView;
 			sourceTree = "<group>";
 		};
 		928D32F41C0B33DC00E77923 /* ThemeController */ = {
@@ -214,6 +265,7 @@
 		92B167DE1C09A1D100634428 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				925D36B51C0EE6F9000F5FDF /* UIButton+Badge */,
 				927CD8A71C0AED0D00DACA4E /* UIImage(Effects) */,
 				92B167DF1C09A1E700634428 /* NavigationBar(Awesome) */,
 			);
@@ -370,17 +422,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				925D36B81C0EE713000F5FDF /* UIButton+Badge.m in Sources */,
 				92C07F441C0DBF3600339576 /* MenuHeaderView.m in Sources */,
 				928D32F71C0B341A00E77923 /* ThemeController.m in Sources */,
 				927CD8AA1C0AED5100DACA4E /* UIImage+ImageEffects.m in Sources */,
 				924F50401C095272002F8F2B /* MainCell.m in Sources */,
 				92B167E21C09A22D00634428 /* UINavigationBar+Awesome.m in Sources */,
 				924F503C1C095251002F8F2B /* MainController.m in Sources */,
+				928BF4791C1022F2006172C9 /* ContentController.m in Sources */,
 				924F50261C094A3C002F8F2B /* ViewController.m in Sources */,
 				92A165171C0C86800053B4F5 /* ThemeMenuController.m in Sources */,
 				92C07F411C0DBCDD00339576 /* TitleImageView.m in Sources */,
 				927CD8A61C0AD84E00DACA4E /* ParallaxHeaderView.m in Sources */,
 				924F50231C094A3C002F8F2B /* AppDelegate.m in Sources */,
+				928BF47D1C106355006172C9 /* ContentHeaderView.m in Sources */,
+				928BF4761C0FE4E6006172C9 /* ContentBottomBar.m in Sources */,
 				924F50201C094A3C002F8F2B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -35,7 +35,7 @@
     _tableView.delegate = self;
     _tableView.dataSource = self;
     
-    self.headerView = [[MenuHeaderView alloc] initWithFrame:CGRectZero];
+    self.headerView = [[MenuHeaderView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 125.f)];
     
     [self.view addSubview:self.tableView];
     [self.view addSubview:self.headerView];
@@ -62,6 +62,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
 }
 
 - (void)viewWillLayoutSubviews {
