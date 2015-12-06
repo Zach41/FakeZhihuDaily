@@ -15,11 +15,15 @@
 #import "ThemeController.h"
 #import "MainController.h"
 #import "MenuHeaderView.h"
+#import "Constants.h"
+#import "Theme.h"
 
 @interface ThemeMenuController () <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) MenuHeaderView *headerView;
+
+@property (nonatomic, strong) NSArray *themes;
 
 @end
 
@@ -53,6 +57,9 @@
     };
     
     self.view.backgroundColor = [UIColor flatBlackColor];
+    
+    // 添加通知
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedThemesDownloaded:) name:kThemeNamesDownloaded object:nil];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -66,6 +73,10 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+}
+
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 - (void)viewWillLayoutSubviews {
@@ -90,7 +101,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return 15;
+    return _themes.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -100,8 +111,10 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
     }
     
-    cell.textLabel.text = [NSString stringWithFormat:@"Index %ld", (long)indexPath.row];
+    Theme *theme = [_themes objectAtIndex:indexPath.row];
+    cell.textLabel.text = [NSString stringWithFormat:@"%@", theme.name];
     cell.textLabel.textColor = [UIColor lightGrayColor];
+    cell.textLabel.font = [UIFont systemFontOfSize:15.0];
     cell.backgroundColor = [UIColor flatBlackColor];
     cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     
@@ -130,6 +143,14 @@
     [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return 44.0;
+    return 56.0;
+}
+
+#pragma mark - Notification Observer
+- (void)receivedThemesDownloaded:(NSNotification *)notification{
+    self.themes = notification.userInfo[@"themes"];
+    
+    [self.tableView reloadData];
+    
 }
 @end

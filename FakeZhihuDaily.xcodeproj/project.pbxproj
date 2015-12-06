@@ -22,9 +22,16 @@
 		928BF47D1C106355006172C9 /* ContentHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 928BF47C1C106355006172C9 /* ContentHeaderView.m */; };
 		928D32F71C0B341A00E77923 /* ThemeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 928D32F61C0B341A00E77923 /* ThemeController.m */; };
 		92A165171C0C86800053B4F5 /* ThemeMenuController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92A165161C0C86800053B4F5 /* ThemeMenuController.m */; };
+		92ACCAFD1C13D618001AFEC2 /* Theme.m in Sources */ = {isa = PBXBuildFile; fileRef = 92ACCAFC1C13D618001AFEC2 /* Theme.m */; };
+		92ACCB001C13E38D001AFEC2 /* Editor.m in Sources */ = {isa = PBXBuildFile; fileRef = 92ACCAFF1C13E38D001AFEC2 /* Editor.m */; };
+		92ACCB041C13E3B4001AFEC2 /* StoryDetail.m in Sources */ = {isa = PBXBuildFile; fileRef = 92ACCB031C13E3B4001AFEC2 /* StoryDetail.m */; };
+		92ACCB071C140A7E001AFEC2 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 92ACCB061C140A7E001AFEC2 /* BaseModel.m */; };
 		92B167E21C09A22D00634428 /* UINavigationBar+Awesome.m in Sources */ = {isa = PBXBuildFile; fileRef = 92B167E11C09A22D00634428 /* UINavigationBar+Awesome.m */; };
 		92C07F411C0DBCDD00339576 /* TitleImageView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C07F401C0DBCDD00339576 /* TitleImageView.m */; };
 		92C07F441C0DBF3600339576 /* MenuHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 92C07F431C0DBF3600339576 /* MenuHeaderView.m */; };
+		92EA74AC1C12D52900CD7D21 /* LaunchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EA74AB1C12D52900CD7D21 /* LaunchController.m */; };
+		92EA74B21C13133000CD7D21 /* Story.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EA74B11C13133000CD7D21 /* Story.m */; };
+		92EA74B61C1318AE00CD7D21 /* ZhihuClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 92EA74B51C1318AE00CD7D21 /* ZhihuClient.m */; };
 		FA82B0C09097D7868107AC44 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 702101AA370675A628B46678 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -60,12 +67,27 @@
 		928D32F61C0B341A00E77923 /* ThemeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeController.m; path = Controllers/ThemeController/ThemeController.m; sourceTree = "<group>"; };
 		92A165151C0C86800053B4F5 /* ThemeMenuController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ThemeMenuController.h; path = Controllers/ThemeMenuController/ThemeMenuController.h; sourceTree = "<group>"; };
 		92A165161C0C86800053B4F5 /* ThemeMenuController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ThemeMenuController.m; path = Controllers/ThemeMenuController/ThemeMenuController.m; sourceTree = "<group>"; };
+		92ACCAF91C13D40D001AFEC2 /* Constants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Constants.h; sourceTree = "<group>"; };
+		92ACCAFB1C13D618001AFEC2 /* Theme.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Theme.h; path = Models/Theme/Theme.h; sourceTree = "<group>"; };
+		92ACCAFC1C13D618001AFEC2 /* Theme.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Theme.m; path = Models/Theme/Theme.m; sourceTree = "<group>"; };
+		92ACCAFE1C13E38D001AFEC2 /* Editor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Editor.h; path = Models/Theme/Editor.h; sourceTree = "<group>"; };
+		92ACCAFF1C13E38D001AFEC2 /* Editor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Editor.m; path = Models/Theme/Editor.m; sourceTree = "<group>"; };
+		92ACCB021C13E3B4001AFEC2 /* StoryDetail.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = StoryDetail.h; path = Models/StoryDetail/StoryDetail.h; sourceTree = "<group>"; };
+		92ACCB031C13E3B4001AFEC2 /* StoryDetail.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = StoryDetail.m; path = Models/StoryDetail/StoryDetail.m; sourceTree = "<group>"; };
+		92ACCB051C140A7E001AFEC2 /* BaseModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = BaseModel.h; path = Models/BaseModel.h; sourceTree = "<group>"; };
+		92ACCB061C140A7E001AFEC2 /* BaseModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = BaseModel.m; path = Models/BaseModel.m; sourceTree = "<group>"; };
 		92B167E01C09A22D00634428 /* UINavigationBar+Awesome.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "UINavigationBar+Awesome.h"; path = "Categories/NavigationBar(Awesome)/UINavigationBar+Awesome.h"; sourceTree = "<group>"; };
 		92B167E11C09A22D00634428 /* UINavigationBar+Awesome.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "UINavigationBar+Awesome.m"; path = "Categories/NavigationBar(Awesome)/UINavigationBar+Awesome.m"; sourceTree = "<group>"; };
 		92C07F3F1C0DBCDD00339576 /* TitleImageView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TitleImageView.h; path = Views/MenuHeaderView/TitleImageView.h; sourceTree = "<group>"; };
 		92C07F401C0DBCDD00339576 /* TitleImageView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TitleImageView.m; path = Views/MenuHeaderView/TitleImageView.m; sourceTree = "<group>"; };
 		92C07F421C0DBF3600339576 /* MenuHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MenuHeaderView.h; path = Views/MenuHeaderView/MenuHeaderView.h; sourceTree = "<group>"; };
 		92C07F431C0DBF3600339576 /* MenuHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MenuHeaderView.m; path = Views/MenuHeaderView/MenuHeaderView.m; sourceTree = "<group>"; };
+		92EA74AA1C12D52900CD7D21 /* LaunchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LaunchController.h; path = Controllers/LaunchController/LaunchController.h; sourceTree = "<group>"; };
+		92EA74AB1C12D52900CD7D21 /* LaunchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LaunchController.m; path = Controllers/LaunchController/LaunchController.m; sourceTree = "<group>"; };
+		92EA74B01C13133000CD7D21 /* Story.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Story.h; path = Models/Story.h; sourceTree = "<group>"; };
+		92EA74B11C13133000CD7D21 /* Story.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Story.m; path = Models/Story.m; sourceTree = "<group>"; };
+		92EA74B41C1318AE00CD7D21 /* ZhihuClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ZhihuClient.h; path = Models/Client/ZhihuClient.h; sourceTree = "<group>"; };
+		92EA74B51C1318AE00CD7D21 /* ZhihuClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ZhihuClient.m; path = Models/Client/ZhihuClient.m; sourceTree = "<group>"; };
 		F3EFCFA7F704151211525DA8 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -138,6 +160,7 @@
 		924F50351C09519E002F8F2B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				92ACCAF91C13D40D001AFEC2 /* Constants.h */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -145,6 +168,12 @@
 		924F50361C0951AE002F8F2B /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				92ACCAFA1C13D5E0001AFEC2 /* Theme */,
+				92EA74B31C13188A00CD7D21 /* Client */,
+				92EA74AF1C1312F000CD7D21 /* StoryDetail */,
+				92EA74AD1C1312E800CD7D21 /* Story */,
+				92ACCB051C140A7E001AFEC2 /* BaseModel.h */,
+				92ACCB061C140A7E001AFEC2 /* BaseModel.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -152,6 +181,8 @@
 		924F50371C0951B6002F8F2B /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				92EA74A91C12D4FF00CD7D21 /* LaunchController */,
+				926294611C11D30B00D5D40F /* SettingsController */,
 				925D36AE1C0EDB0F000F5FDF /* ContentController */,
 				92A165141C0C85AE0053B4F5 /* ThemeMenuController */,
 				928D32F41C0B33DC00E77923 /* ThemeController */,
@@ -208,13 +239,20 @@
 			name = ContentBottomBar;
 			sourceTree = "<group>";
 		};
-		925D36B51C0EE6F9000F5FDF /* UIButton+Badge */ = {
+		925D36B51C0EE6F9000F5FDF /* UIButton(Badge) */ = {
 			isa = PBXGroup;
 			children = (
 				925D36B61C0EE713000F5FDF /* UIButton+Badge.h */,
 				925D36B71C0EE713000F5FDF /* UIButton+Badge.m */,
 			);
-			name = "UIButton+Badge";
+			name = "UIButton(Badge)";
+			sourceTree = "<group>";
+		};
+		926294611C11D30B00D5D40F /* SettingsController */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = SettingsController;
 			sourceTree = "<group>";
 		};
 		927CD8A31C0AD83300DACA4E /* ParallaxHeaderView */ = {
@@ -262,10 +300,21 @@
 			name = ThemeMenuController;
 			sourceTree = "<group>";
 		};
+		92ACCAFA1C13D5E0001AFEC2 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				92ACCAFB1C13D618001AFEC2 /* Theme.h */,
+				92ACCAFC1C13D618001AFEC2 /* Theme.m */,
+				92ACCAFE1C13E38D001AFEC2 /* Editor.h */,
+				92ACCAFF1C13E38D001AFEC2 /* Editor.m */,
+			);
+			name = Theme;
+			sourceTree = "<group>";
+		};
 		92B167DE1C09A1D100634428 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
-				925D36B51C0EE6F9000F5FDF /* UIButton+Badge */,
+				925D36B51C0EE6F9000F5FDF /* UIButton(Badge) */,
 				927CD8A71C0AED0D00DACA4E /* UIImage(Effects) */,
 				92B167DF1C09A1E700634428 /* NavigationBar(Awesome) */,
 			);
@@ -290,6 +339,42 @@
 				92C07F431C0DBF3600339576 /* MenuHeaderView.m */,
 			);
 			name = MenuHeaderView;
+			sourceTree = "<group>";
+		};
+		92EA74A91C12D4FF00CD7D21 /* LaunchController */ = {
+			isa = PBXGroup;
+			children = (
+				92EA74AA1C12D52900CD7D21 /* LaunchController.h */,
+				92EA74AB1C12D52900CD7D21 /* LaunchController.m */,
+			);
+			name = LaunchController;
+			sourceTree = "<group>";
+		};
+		92EA74AD1C1312E800CD7D21 /* Story */ = {
+			isa = PBXGroup;
+			children = (
+				92EA74B01C13133000CD7D21 /* Story.h */,
+				92EA74B11C13133000CD7D21 /* Story.m */,
+			);
+			name = Story;
+			sourceTree = "<group>";
+		};
+		92EA74AF1C1312F000CD7D21 /* StoryDetail */ = {
+			isa = PBXGroup;
+			children = (
+				92ACCB021C13E3B4001AFEC2 /* StoryDetail.h */,
+				92ACCB031C13E3B4001AFEC2 /* StoryDetail.m */,
+			);
+			name = StoryDetail;
+			sourceTree = "<group>";
+		};
+		92EA74B31C13188A00CD7D21 /* Client */ = {
+			isa = PBXGroup;
+			children = (
+				92EA74B41C1318AE00CD7D21 /* ZhihuClient.h */,
+				92EA74B51C1318AE00CD7D21 /* ZhihuClient.m */,
+			);
+			name = Client;
 			sourceTree = "<group>";
 		};
 		A9E649A4CBACE49C050ADBA0 /* Pods */ = {
@@ -423,20 +508,27 @@
 			buildActionMask = 2147483647;
 			files = (
 				925D36B81C0EE713000F5FDF /* UIButton+Badge.m in Sources */,
+				92EA74B61C1318AE00CD7D21 /* ZhihuClient.m in Sources */,
 				92C07F441C0DBF3600339576 /* MenuHeaderView.m in Sources */,
 				928D32F71C0B341A00E77923 /* ThemeController.m in Sources */,
+				92EA74B21C13133000CD7D21 /* Story.m in Sources */,
 				927CD8AA1C0AED5100DACA4E /* UIImage+ImageEffects.m in Sources */,
 				924F50401C095272002F8F2B /* MainCell.m in Sources */,
 				92B167E21C09A22D00634428 /* UINavigationBar+Awesome.m in Sources */,
+				92ACCB041C13E3B4001AFEC2 /* StoryDetail.m in Sources */,
 				924F503C1C095251002F8F2B /* MainController.m in Sources */,
 				928BF4791C1022F2006172C9 /* ContentController.m in Sources */,
 				924F50261C094A3C002F8F2B /* ViewController.m in Sources */,
+				92ACCB001C13E38D001AFEC2 /* Editor.m in Sources */,
 				92A165171C0C86800053B4F5 /* ThemeMenuController.m in Sources */,
 				92C07F411C0DBCDD00339576 /* TitleImageView.m in Sources */,
+				92ACCAFD1C13D618001AFEC2 /* Theme.m in Sources */,
 				927CD8A61C0AD84E00DACA4E /* ParallaxHeaderView.m in Sources */,
 				924F50231C094A3C002F8F2B /* AppDelegate.m in Sources */,
+				92EA74AC1C12D52900CD7D21 /* LaunchController.m in Sources */,
 				928BF47D1C106355006172C9 /* ContentHeaderView.m in Sources */,
 				928BF4761C0FE4E6006172C9 /* ContentBottomBar.m in Sources */,
+				92ACCB071C140A7E001AFEC2 /* BaseModel.m in Sources */,
 				924F50201C094A3C002F8F2B /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

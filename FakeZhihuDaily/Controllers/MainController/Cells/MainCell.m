@@ -8,6 +8,7 @@
 
 #import <Chameleon.h>
 #import <Masonry.h>
+#import <UIImageView+WebCache.h>
 
 #import "MainCell.h"
 
@@ -18,6 +19,7 @@
 @property (nonatomic, strong) UILabel *tagLabel;
 @property (nonatomic, strong) UILabel *titleLabel;
 @property (nonatomic, strong) UILabel *categoryLabel;
+@property (nonatomic, strong) UIView  *separateLine;
 
 @end
 
@@ -36,6 +38,7 @@
         self.titleImageView = [[UIImageView alloc] init];
         _titleImageView.contentMode = UIViewContentModeScaleAspectFill;
         _titleImageView.clipsToBounds = YES;
+        _titleImageView.backgroundColor = [UIColor flatBlackColor];
         [self.contentView addSubview:_titleImageView];
         
         self.tagLabel = [UILabel new];
@@ -57,10 +60,12 @@
         _categoryLabel.font = [UIFont systemFontOfSize:10.f];
         [self.contentView addSubview:_categoryLabel];
         
-        [self setupLayout];
+        self.separateLine = [[UIView alloc] init];
+        _separateLine.backgroundColor = [UIColor flatGrayColor];
+        _separateLine.alpha = 0.5;
+        [self.contentView addSubview:_separateLine];
         
-        // TODO: 删除测试代码
-        [self setupTest];
+        [self setupLayout];
     }
     
     return self;
@@ -70,6 +75,36 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+- (void)setStory:(Story *)story {
+    _story = story;
+    
+    if (_story == nil) {
+        return;
+    }
+    
+    if (_story.imageURLs != nil) {
+        [_titleImageView sd_setImageWithURL:[NSURL URLWithString:_story.imageURLs[0]]];
+    } else {
+        [_titleImageView sd_setImageWithURL:[NSURL URLWithString:_story.topImageURL]];
+    }
+    
+    if (_story.multipic) {
+        _tagLabel.hidden = NO;
+        _tagLabel.text = @"多图";
+    } else {
+        _tagLabel.hidden = YES;
+    }
+    
+    _titleLabel.text = _story.title;
+    if (_story.hasRead) {
+        _titleLabel.textColor = [UIColor lightGrayColor];
+    } else {
+        _titleLabel.textColor = [UIColor blackColor];
+    }
+    // 暂时没从API重找到这一字段，先隐藏
+    _categoryLabel.hidden = YES;
 }
 
 #pragma mark - Private
@@ -102,16 +137,15 @@
     [_categoryLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.greaterThanOrEqualTo(_titleLabel.mas_bottom).with.offset(5);
         make.left.equalTo(_titleLabel.mas_left);
-        make.bottom.equalTo(self.contentView.mas_bottom).with.offset(-5);
+        make.bottom.equalTo(_separateLine).with.offset(-5);
     }];
-}
-
-// just for test
-- (void)setupTest {
-    _titleImageView.image = [UIImage imageNamed:@"tets_thumbnail"];
-    _titleLabel.text = @"卷饼做起来特别简单，但注意一些细节会更好卷饼做起来特别简单，但注意一些细节会更好";
-    _categoryLabel.text = @"吃货日常";
-    _tagLabel.text = @"多图";
+    
+    [_separateLine mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.contentView).with.offset(15);
+        make.bottom.equalTo(self.contentView);
+        make.height.equalTo(@1);
+        make.right.equalTo(self.contentView);
+    }];
 }
 
 @end

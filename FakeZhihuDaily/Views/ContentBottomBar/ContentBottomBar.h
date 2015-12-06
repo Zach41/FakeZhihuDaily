@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-typedef void (^buttonActions)(NSInteger index);
+typedef void (^buttonActions)(UIButton *sender, NSInteger index);
 
 @interface ContentBottomBar : UIView
 

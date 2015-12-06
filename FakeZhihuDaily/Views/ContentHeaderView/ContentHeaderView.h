@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ContentHeaderView : UIView
+@interface ContentHeaderView : UIImageView
 
-@property (nonatomic, )
+@property (nonatomic, strong) UILabel *titleLabel;
+@property (nonatomic, strong) UILabel *sourceLabel;
 
 @end

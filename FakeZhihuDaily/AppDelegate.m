@@ -7,10 +7,12 @@
 //
 
 #import <MMDrawerController.h>
+#import <SVProgressHUD.h>
 
 #import "AppDelegate.h"
 #import "MainController.h"
 #import "ThemeMenuController.h"
+
 
 @interface AppDelegate ()
 
@@ -21,13 +23,14 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    [self setupProgressHUD];
+    
     self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
     
     MainController *main = [[MainController alloc] initWithStyle:UITableViewStylePlain];
     UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:main];
     
     ThemeMenuController *menuController = [[ThemeMenuController alloc] init];
-//    UINavigationController *menuNav = [[UINavigationController alloc] initWithRootViewController:menuController];
     
     MMDrawerController *rootViewController = [[MMDrawerController alloc] initWithCenterViewController:mainNav leftDrawerViewController:menuController];
     
@@ -36,7 +39,7 @@
     [rootViewController setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
     [rootViewController setCloseDrawerGestureModeMask:MMCloseDrawerGestureModeAll];
     rootViewController.shouldStretchDrawer = NO;
-//    rootViewController.
+
     self.window.rootViewController = rootViewController;
     
     [self.window makeKeyAndVisible];
@@ -63,6 +66,10 @@
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+}
+
+- (void)setupProgressHUD {
+    [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
 }
 
 @end

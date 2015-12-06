@@ -26,4 +26,6 @@
 
 - (void)layoutParallaxThemeHeaderForScrollViewOffset:(CGPoint)offset;
 
+- (void)layoutParallaxWebHeaderForScrollViewOffset:(CGPoint)offset;
+
 @end

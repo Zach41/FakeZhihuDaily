@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Story.h"
+
 @interface MainCell : UITableViewCell
 
 // TODO: 需要给MainCell一个Model属性
 
-// MainCell的文字颜色，以区分是否已经阅读过
-@property (nonatomic,strong) UIColor *textColor;
+@property (nonatomic, strong) Story *story;
 
 @end

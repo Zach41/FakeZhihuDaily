@@ -87,6 +87,24 @@ const CGFloat kParallaxThemeDelta   = -95.0;
     }
 }
 
+- (void)layoutParallaxWebHeaderForScrollViewOffset:(CGPoint)offset {
+    if (offset.y<-220+kParallaxDeltaValue) {
+        [self.delegate lockDirection];
+        return;
+    }
+    if (offset.y<-220) {
+        CGRect rect = CGRectMake(0, 0, kHeaderSize.width, kHeaderSize.height);
+        CGFloat delta = offset.y+220;
+        
+        rect.origin.y +=delta;
+        rect.size.height -= delta;
+        
+        self.scrollView.frame = rect;
+        self.clipsToBounds = NO;
+        
+    }
+}
+
 #pragma mark - Private
 
 - (void)commonInitialSetupForSubview:(UIView *)subview {

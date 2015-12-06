@@ -122,7 +122,7 @@ const CGFloat kButtonWidth = 25.f;
         // 添加底部栏按钮的回调函数
         [button bk_addEventHandler:^(id handler) {
             if (self.actions) {
-                self.actions(i);
+                self.actions(button, i);
             }
             NSLog(@"Bottom Bar %d was selected.", i);
         }forControlEvents:UIControlEventTouchUpInside];
