@@ -8,17 +8,27 @@
 
 #import <MMDrawerController.h>
 #import <SVProgressHUD.h>
+#import <SDWebImage/SDWebImageManager.h>
+#import <SDWebImageDownloader.h>
+
 
 #import "AppDelegate.h"
 #import "MainController.h"
 #import "ThemeMenuController.h"
-
+#import "ZhihuClient.h"
+#import "Constants.h"
 
 @interface AppDelegate ()
 
 @end
 
 @implementation AppDelegate
+
+- (BOOL)application:(UIApplication *)application willFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [self getLaunchImage];
+    
+    return YES;
+}
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
@@ -70,6 +80,31 @@
 
 - (void)setupProgressHUD {
     [SVProgressHUD setBackgroundColor:[UIColor clearColor]];
+}
+
+- (void)getLaunchImage {
+    ZhihuClient *sharedClient = [ZhihuClient sharedClient];
+    [sharedClient getWithURL:kLaunchImage1080_1776
+                  parameters:nil
+                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                         NSString *imageText = responseObject[@"text"];
+                         NSString *imageURLString = responseObject[@"img"];
+                         
+                         SDWebImageManager *sharedWebManager = [SDWebImageManager sharedManager];
+                         SDWebImageDownloader *downloader = [sharedWebManager imageDownloader];
+                         
+                         [downloader downloadImageWithURL:[NSURL URLWithString:imageURLString]
+                                                  options:SDWebImageDownloaderHighPriority
+                                                 progress:nil
+                                                completed:^(UIImage *image, NSData *data, NSError *error, BOOL finished) {
+                                                    [[sharedWebManager imageCache] storeImage:image forKey:kLaunchImage1080_1776];
+                                                    [[NSUserDefaults standardUserDefaults] setObject:imageText forKey:kLaunchTextKey];
+                                                    [[NSUserDefaults standardUserDefaults] synchronize];
+                                                }];
+                         
+                     }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                         NSLog(@"Error : %@", error);
+                     }];
 }
 
 @end

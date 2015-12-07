@@ -10,6 +10,7 @@
 
 @interface LaunchController : UIViewController
 
-@property (nonatomic, strong) UIImage *launchImage;
+@property (nonatomic, strong) UIImage   *launchImage;
+@property (nonatomic, copy) NSString    *launchText;
 
 @end

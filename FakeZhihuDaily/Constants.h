@@ -16,8 +16,14 @@
 #define kNewsLongComments       @"story/%@/long-comments"
 #define kThemes                 @"themes"
 #define kThemeStories           @"theme/%@"
+#define kLaunchImage1080_1776   @"start-image/1080*1776"
 
+// Notifications
 #define kThemeNamesDownloaded   @"ThemeNamesDownloaded"
 #define kShowMainView           @"ShowMainView"
+#define kLaunchImageDownloaded  @"LaunchImageDownloaded"
+
+// UserDefaults key
+#define kLaunchTextKey          @"LaunchTextKey"
 
 #endif /* Constants_h */

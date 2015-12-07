@@ -36,7 +36,7 @@ const CGFloat kIconHeight  = 45.f;
         self.layer.shadowOffset = CGSizeMake(0, 1.1);
         self.layer.shadowOpacity = 0.2f;
         self.layer.shadowPath = shadowPath.CGPath;
-        self.layer.shadowColor = [UIColor blackColor].CGColor;
+        self.layer.shadowColor = [UIColor colorWithWhite:0.000 alpha:0.6].CGColor;
         self.layer.shadowRadius = 1.f;
         self.clipsToBounds = NO;
         

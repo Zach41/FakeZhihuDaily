@@ -11,6 +11,7 @@
 #import <ZFModalTransitionAnimator.h>
 #import <Masonry.h>
 #import <SVProgressHUD.h>
+#import <SDWebImageManager.h>
 
 #import "MainController.h"
 #import "MainCell.h"
@@ -35,6 +36,9 @@ static NSString * const kMainCellID = @"MainCell";
 @property (nonatomic, strong) NSArray           *stories;
 @property (nonatomic, strong) NSArray           *topStories;
 @property (nonatomic, assign) BOOL              updated;
+
+//@property (nonatomic, copy) NSString          *launchImageText;
+//@property (nonatomic, strong) UIImage           *launchImage;
 
 @end
 
@@ -67,6 +71,9 @@ static NSString * const kMainCellID = @"MainCell";
     [self setupNavigationBar];
     // 设置引导界面
     [self setupLaunchView];
+    
+    // 添加通知
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLauchImageDownloadedNotification:) name:kLaunchImageDownloaded object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -81,6 +88,10 @@ static NSString * const kMainCellID = @"MainCell";
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void)dealloc {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 #pragma mark - Table view data source
@@ -157,7 +168,19 @@ static NSString * const kMainCellID = @"MainCell";
     self.launchView = launchView;
     
     self.launchController = [[LaunchController alloc] init];
-    _launchController.launchImage = [UIImage imageNamed:@"lauchImage"];
+    
+    SDWebImageManager *sharedManager = [SDWebImageManager sharedManager];
+    
+    UIImage *diskImage = [[sharedManager imageCache] imageFromDiskCacheForKey:kLaunchImage1080_1776];
+
+    
+    if (diskImage) {
+        _launchController.launchImage = diskImage;
+        _launchController.launchText = [[NSUserDefaults standardUserDefaults] objectForKey:kLaunchTextKey];
+    } else {
+        _launchController.launchImage = [UIImage imageNamed:@"lauchImage"];
+        _launchController.launchText = @"";
+    }
     [self addChildViewController:_launchController];
     
     [launchView addSubview:_launchController.view];
@@ -251,7 +274,6 @@ static NSString * const kMainCellID = @"MainCell";
         _headerScrollView.imageURLStringsGroup = [urlArray copy];
         _headerScrollView.titlesGroup = titleArray;
     });
-    
 }
 
 @end
