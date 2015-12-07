@@ -84,6 +84,9 @@
         return;
     }
     
+    if (_story.imageURLs == nil && _story.topImageURL == nil) {
+        _titleImageView.hidden = YES;
+    }
     if (_story.imageURLs != nil) {
         [_titleImageView sd_setImageWithURL:[NSURL URLWithString:_story.imageURLs[0]]];
     } else {

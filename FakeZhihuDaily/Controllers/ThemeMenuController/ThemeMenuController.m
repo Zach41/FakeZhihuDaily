@@ -17,6 +17,8 @@
 #import "MenuHeaderView.h"
 #import "Constants.h"
 #import "Theme.h"
+#import "MainController.h"
+#import "ThemeController.h"
 
 @interface ThemeMenuController () <UITableViewDelegate, UITableViewDataSource>
 
@@ -24,6 +26,9 @@
 @property (nonatomic, strong) MenuHeaderView *headerView;
 
 @property (nonatomic, strong) NSArray *themes;
+
+@property (nonatomic, strong) NSMutableArray *controllers;
+@property (nonatomic, strong) UINavigationController *mainNav;
 
 @end
 
@@ -73,6 +78,13 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
+    
+    if (self.mainNav == nil) {
+        UINavigationController *centerViewController = (UINavigationController *)[self.mm_drawerController centerViewController];
+        if ([[centerViewController topViewController] isKindOfClass:[MainController class]]) {
+            self.mainNav = centerViewController;
+        }
+    }
 }
 
 - (void)dealloc {
@@ -101,7 +113,7 @@
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return _themes.count;
+    return _themes.count+1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -111,8 +123,12 @@
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kCellID];
     }
     
-    Theme *theme = [_themes objectAtIndex:indexPath.row];
-    cell.textLabel.text = [NSString stringWithFormat:@"%@", theme.name];
+    if (indexPath.row == 0) {
+        cell.textLabel.text = @"主页";
+    } else {
+        Theme *theme = [_themes objectAtIndex:indexPath.row-1];
+        cell.textLabel.text = [NSString stringWithFormat:@"%@", theme.name];
+    }
     cell.textLabel.textColor = [UIColor lightGrayColor];
     cell.textLabel.font = [UIFont systemFontOfSize:15.0];
     cell.backgroundColor = [UIColor flatBlackColor];
@@ -129,18 +145,19 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath .row == 0) {
-        MainController *mainController = [[MainController alloc] init];
-        UINavigationController *mainNav = [[UINavigationController alloc] initWithRootViewController:mainController];
-        
-        [self.mm_drawerController setCenterViewController:mainNav withCloseAnimation:YES completion:nil];
+        [self.mm_drawerController setCenterViewController:_mainNav withCloseAnimation:YES completion:nil];
         [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
         return;
     }
-    ThemeController *themeController = [[ThemeController alloc] init];
-    UINavigationController *themeNav = [[UINavigationController alloc] initWithRootViewController:themeController];
+    if (_controllers[indexPath.row-1] == [NSNull null]) {
+        Theme *theme = [_themes objectAtIndex:indexPath.row-1];
+        ThemeController *themeController = [[ThemeController alloc] init];
+        themeController.theme = theme;
+        UINavigationController *themeNav = [[UINavigationController alloc] initWithRootViewController:themeController];
+        [_controllers replaceObjectAtIndex:indexPath.row-1 withObject:themeNav];
+    }
     
-    [self.mm_drawerController setCenterViewController:themeNav withCloseAnimation:YES completion:nil];
-    [self.tableView deselectRowAtIndexPath:indexPath animated:YES];
+    [self.mm_drawerController setCenterViewController:_controllers[indexPath.row-1] withCloseAnimation:YES completion:nil];
 }
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     return 56.0;
@@ -149,6 +166,11 @@
 #pragma mark - Notification Observer
 - (void)receivedThemesDownloaded:(NSNotification *)notification{
     self.themes = notification.userInfo[@"themes"];
+    self.controllers = [NSMutableArray arrayWithCapacity:_themes.count];
+    
+    for (int i=0; i<_themes.count; i++) {
+        [_controllers addObject:[NSNull null]];
+    }
     
     [self.tableView reloadData];
     

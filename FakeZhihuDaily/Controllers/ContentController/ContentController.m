@@ -36,7 +36,7 @@ const CGFloat kHeaderImageHeight = 220.0;
     [super viewDidLoad];
     
     [self.navigationController setNavigationBarHidden:YES animated:NO];
-    self.mm_drawerController.openDrawerGestureModeMask = MMDrawerSideNone;
+    self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
     
     self.bottomBar = [[ContentBottomBar alloc] initWithFrame:CGRectMake(0, 0, kViewSize.width, kBottomBarHeight)];
     

@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Theme.h"
+
 @interface ThemeController : UITableViewController
+
+@property (nonatomic, strong) Theme *theme;
 
 @end

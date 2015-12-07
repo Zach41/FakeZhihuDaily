@@ -15,7 +15,7 @@
 #define kNewsShortComments      @"story/%@/short-comments"
 #define kNewsLongComments       @"story/%@/long-comments"
 #define kThemes                 @"themes"
-#define kThemeStories           @"theme/%@"
+#define kThemeStories           @"theme/%ld"
 #define kLaunchImage1080_1776   @"start-image/1080*1776"
 
 // Notifications

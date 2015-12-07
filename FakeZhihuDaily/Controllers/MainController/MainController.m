@@ -79,6 +79,8 @@ static NSString * const kMainCellID = @"MainCell";
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
     [self getThemesAndStory];
+    
+    self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeAll;
 }
 
 - (void)viewDidAppear:(BOOL)animated {
