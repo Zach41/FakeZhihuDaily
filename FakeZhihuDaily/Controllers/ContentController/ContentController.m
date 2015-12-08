@@ -77,17 +77,7 @@ const CGFloat kHeaderImageHeight = 223.0;
     
     self.webView = [[UIWebView alloc] initWithFrame:CGRectZero];
     self.webView.scrollView.delegate = self;
-    
-    if (_story.topImageURL != nil || (_story.imageURLs !=nil && _story.imageURLs.count>0)) {
-        self.headerImageView = [[ContentHeaderView alloc] initWithFrame:CGRectMake(0, 0, kViewSize.width, kHeaderImageHeight)];
-        self.headerImageView.clipsToBounds = YES;
-        self.headerView = [ParallaxHeaderView parallaxHeaderWithSubView:_headerImageView forSize:CGSizeMake(kViewSize.width, kHeaderImageHeight)];
-        self.headerView.delegate = self;
-        
-        [self.webView.scrollView addSubview:_headerView];
-    } else {
-        self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
-    }
+    self.webView.backgroundColor = [UIColor whiteColor];
     
     [self.view addSubview:_webView];
     [self.view addSubview:_bottomBar];
@@ -153,8 +143,18 @@ const CGFloat kHeaderImageHeight = 223.0;
 
 #pragma mark - Private
 - (void)setupContent{
-    _headerImageView.titleLabel.text = _detail.title;
-    _headerImageView.sourceLabel.text = _detail.imageSourceString;
+    if (_detail.imageURLString != nil) {
+        self.headerImageView = [[ContentHeaderView alloc] initWithFrame:CGRectMake(0, 0, kViewSize.width, kHeaderImageHeight)];
+        self.headerImageView.clipsToBounds = YES;
+        _headerImageView.titleLabel.text = _detail.title;
+        _headerImageView.sourceLabel.text = _detail.imageSourceString;
+        
+        self.headerView = [ParallaxHeaderView parallaxHeaderWithSubView:_headerImageView forSize:CGSizeMake(kViewSize.width, kHeaderImageHeight)];
+        self.headerView.delegate = self;
+        
+        [self.webView.scrollView addSubview:_headerView];
+    }
+    
     NSString *imageURLString = nil;
     if (_detail.imageURLString) {
         imageURLString = _detail.imageURLString;
