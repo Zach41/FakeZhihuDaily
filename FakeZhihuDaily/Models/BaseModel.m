@@ -92,8 +92,7 @@
     for (id modelValue in arrayValue) {
         if (![modelValue isKindOfClass:[NSDictionary class]]) {
             // 如果不是字典就认为是OC的类型对象，这样简单判断会有问题，但先这么写了
-            typeof(modelClass) tempModel = modelValue;
-            [modelArray addObject:tempModel];
+            [modelArray addObject:modelValue];
             continue;
         }
         id tempModel = [[modelClass alloc] initWithDictionary:modelValue];

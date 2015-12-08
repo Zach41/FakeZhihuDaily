@@ -52,7 +52,8 @@
     
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.bottom.equalTo(_sourceLabel.mas_top).with.offset(-16);
-        make.left.equalTo(self.mas_left).with.offset(32);
+        make.left.equalTo(self.mas_left).with.offset(8);
+        make.right.equalTo(self.mas_right).with.offset(-8);
     }];
 }
 
@@ -76,6 +77,7 @@
     [self addSubview:_sourceLabel];
     
     self.contentMode = UIViewContentModeScaleAspectFill;
+    self.backgroundColor = [UIColor flatBlackColor];
 }
 
 @end

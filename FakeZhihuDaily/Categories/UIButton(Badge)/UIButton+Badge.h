@@ -21,6 +21,8 @@
 @property (nonatomic, assign) CGFloat   badgeOriginX;
 @property (nonatomic, assign) CGFloat   badgeOriginY;
 
+@property (nonatomic, assign) BOOL      buttonSelected;
+
 @property (nonatomic, assign) BOOL shouldHideBageAtZero;
 @property (nonatomic, assign) BOOL shouldBounceAtChange;
 

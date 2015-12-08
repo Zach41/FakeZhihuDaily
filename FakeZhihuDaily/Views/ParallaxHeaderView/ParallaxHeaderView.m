@@ -88,13 +88,13 @@ const CGFloat kParallaxThemeDelta   = -95.0;
 }
 
 - (void)layoutParallaxWebHeaderForScrollViewOffset:(CGPoint)offset {
-    if (offset.y<-220+kParallaxDeltaValue) {
+    if (offset.y<kParallaxDeltaValue-20) {
         [self.delegate lockDirection];
         return;
     }
-    if (offset.y<-220) {
+    if (offset.y<-20) {
         CGRect rect = CGRectMake(0, 0, kHeaderSize.width, kHeaderSize.height);
-        CGFloat delta = offset.y+220;
+        CGFloat delta = offset.y+20;
         
         rect.origin.y +=delta;
         rect.size.height -= delta;

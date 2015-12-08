@@ -9,17 +9,22 @@
 #import <Masonry.h>
 #import <Chameleon.h>
 #import <UIViewController+MMDrawerController.h>
+#import <UIImageView+WebCache.h>
+#import <SVProgressHUD.h>
 
+#import "UIButton+Badge.h"
 #import "ContentController.h"
 #import "ContentBottomBar.h"
 #import "ParallaxHeaderView.h"
 #import "ContentHeaderView.h"
 #import "UINavigationBar+Awesome.h"
+#import "ZhihuClient.h"
+#import "Constants.h"
 
 #define kViewSize self.view.frame.size
 
 const CGFloat kBottomBarHeight = 50.0;
-const CGFloat kHeaderImageHeight = 220.0;
+const CGFloat kHeaderImageHeight = 223.0;
 
 @interface ContentController () <UIScrollViewDelegate, ParallaxHeaderViewDelegate>
 
@@ -28,15 +33,14 @@ const CGFloat kHeaderImageHeight = 220.0;
 @property (nonatomic, strong) ContentHeaderView *headerImageView;
 @property (nonatomic, strong) UIWebView *webView;
 
+@property (nonatomic, strong) StoryDetail *detail;
+
 @end
 
 @implementation ContentController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
-    [self.navigationController setNavigationBarHidden:YES animated:NO];
-    self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
     
     self.bottomBar = [[ContentBottomBar alloc] initWithFrame:CGRectMake(0, 0, kViewSize.width, kBottomBarHeight)];
     
@@ -49,6 +53,21 @@ const CGFloat kHeaderImageHeight = 220.0;
                 [strongSelf.navigationController popViewControllerAnimated:YES];
                 [strongSelf.navigationController setNavigationBarHidden:NO animated:NO];
             }
+            case 1:
+                break;
+            case 2: {
+                NSInteger curValue = [button.badgeValue integerValue];
+                if (button.buttonSelected) {
+                    curValue -= 1;
+                    button.textColor = [UIColor lightGrayColor];
+                    button.buttonSelected = NO;
+                } else {
+                    curValue += 1;
+                    button.textColor = [UIColor flatBlueColor];
+                    button.buttonSelected = YES;
+                }
+                button.badgeValue = [NSString stringWithFormat:@"%ld", (long)curValue];
+            }
                 break;
                 
             default:
@@ -56,23 +75,44 @@ const CGFloat kHeaderImageHeight = 220.0;
         }
     };
     
-    self.headerImageView = [[ContentHeaderView alloc] initWithFrame:CGRectMake(0, 0, kViewSize.width, kHeaderImageHeight)];
-    self.headerImageView.clipsToBounds = YES;
-    self.headerView = [ParallaxHeaderView parallaxHeaderWithSubView:_headerImageView forSize:CGSizeMake(kViewSize.width, kHeaderImageHeight)];
     self.webView = [[UIWebView alloc] initWithFrame:CGRectZero];
     self.webView.scrollView.delegate = self;
-    self.headerView.delegate = self;
+    
+    if (_story.topImageURL != nil || (_story.imageURLs !=nil && _story.imageURLs.count>0)) {
+        self.headerImageView = [[ContentHeaderView alloc] initWithFrame:CGRectMake(0, 0, kViewSize.width, kHeaderImageHeight)];
+        self.headerImageView.clipsToBounds = YES;
+        self.headerView = [ParallaxHeaderView parallaxHeaderWithSubView:_headerImageView forSize:CGSizeMake(kViewSize.width, kHeaderImageHeight)];
+        self.headerView.delegate = self;
+        
+        [self.webView.scrollView addSubview:_headerView];
+    } else {
+        self.webView.scrollView.contentInset = UIEdgeInsetsMake(-20, 0, 0, 0);
+    }
     
     [self.view addSubview:_webView];
     [self.view addSubview:_bottomBar];
-    [self.webView.scrollView addSubview:_headerView];
     
-    _webView.scrollView.contentInset = UIEdgeInsetsMake(kHeaderImageHeight, 0, 0, 0);
+    _webView.scrollView.showsHorizontalScrollIndicator = NO;
+    self.view.clipsToBounds = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
     
-    NSURL *testURL = [NSURL URLWithString:@"http://daily.zhihu.com/story/7541839?utm_campaign=in_app_share&utm_medium=iOS&utm_source=qq"];
-    NSURLRequest *request = [NSURLRequest requestWithURL:testURL];
-    [_webView loadRequest:request];
-    [self setupTest];
+    [self.navigationController setNavigationBarHidden:YES animated:NO];
+    self.mm_drawerController.openDrawerGestureModeMask = MMOpenDrawerGestureModeNone;
+    
+    if (self.detail) {
+        [self setupContent];
+    } else {
+        [SVProgressHUD show];
+        [self getStoryContent];
+    }
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    NSLog(@"Log point");
 }
 
 - (void)viewDidLayoutSubviews {
@@ -90,12 +130,14 @@ const CGFloat kHeaderImageHeight = 220.0;
         make.top.equalTo(self.view.mas_top);
     }];
     
-    [_headerView mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(_webView);
-        make.right.equalTo(_webView);
-        make.top.equalTo(_webView.scrollView.mas_top).with.offset(-kHeaderImageHeight);
-        make.height.equalTo(@(kHeaderImageHeight));
-    }];
+    if (self.headerView) {
+        [_headerView mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.equalTo(_webView);
+            make.right.equalTo(_webView);
+            make.top.equalTo(_webView.scrollView.mas_top).with.offset(-20);
+            make.height.equalTo(@(kHeaderImageHeight));
+        }];
+    }
 }
 
 #pragma mark - ScrolView delegate
@@ -105,15 +147,43 @@ const CGFloat kHeaderImageHeight = 220.0;
 
 #pragma mark - ParallaxHeaderView Delegate 
 - (void)lockDirection {
-    [_webView.scrollView setContentOffset:CGPointMake(0, -kHeaderImageHeight-90)];
-    [_webView.scrollView setContentOffset:CGPointMake(0, -kHeaderImageHeight) animated:YES];
+    [_webView.scrollView setContentOffset:CGPointMake(0, -110)];
+    [_webView.scrollView setContentOffset:CGPointMake(0, -20) animated:YES];
 }
 
 #pragma mark - Private
-- (void)setupTest {
-    _headerImageView.titleLabel.text = @"电动刷牙好还是手动刷牙好";
-    _headerImageView.sourceLabel.text = @"图片：Yestone.com 版权图片库";
-    _headerImageView.image = [UIImage imageNamed:@"test_scroll_image"];
+- (void)setupContent{
+    _headerImageView.titleLabel.text = _detail.title;
+    _headerImageView.sourceLabel.text = _detail.imageSourceString;
+    NSString *imageURLString = nil;
+    if (_detail.imageURLString) {
+        imageURLString = _detail.imageURLString;
+    } else if (_story.imageURLs && _story.imageURLs.count>0) {
+        imageURLString = _story.imageURLs[0];
+    } else {
+        imageURLString = _story.topImageURL;
+    }
+    [_headerImageView sd_setImageWithURL:[NSURL URLWithString:imageURLString]];
+    
+    NSString *htmlString = [NSString stringWithFormat:@"<html>\n<head>\n<link rel=\"stylesheet\" href=\"%@\"/>\n</head>\n<body>\n%@\n</body>\n</html>", _detail.cssURLStrings[0], _detail.bodyString];
+    [_webView loadHTMLString:htmlString baseURL:nil];
+}
+
+- (void)getStoryContent {
+    ZhihuClient *sharedClient = [ZhihuClient sharedClient];
+    
+    NSString *urlString = [NSString stringWithFormat:kNewsDetail, _story.storyID];
+    [sharedClient getWithURL:urlString
+                  parameters:nil
+                     success:^(AFHTTPRequestOperation *operation, id responseObject) {
+                         self.detail = [[StoryDetail alloc] initWithDictionary:responseObject];
+                         
+                         [self setupContent];
+                         [SVProgressHUD dismiss];
+                     }
+                     failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                         NSLog(@"Error : %@", error);
+                     }];
 }
 
 @end

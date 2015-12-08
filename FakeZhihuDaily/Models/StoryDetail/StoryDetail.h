@@ -8,6 +8,18 @@
 
 #import <Foundation/Foundation.h>
 
-@interface StoryDetail : NSObject
+#import "BaseModel.h"
+
+@interface StoryDetail : BaseModel
+
+@property (nonatomic, copy) NSString        *bodyString;
+@property (nonatomic, copy) NSString        *title;
+@property (nonatomic, copy) NSString        *imageSourceString;
+@property (nonatomic, copy) NSString        *imageURLString;
+@property (nonatomic, copy) NSString        *shareURLString;
+@property (nonatomic, copy) NSString        *gaPrefix;
+@property (nonatomic, assign) NSInteger     type;
+@property (nonatomic, copy) NSString        *detailID;
+@property (nonatomic, copy) NSArray         *cssURLStrings;
 
 @end

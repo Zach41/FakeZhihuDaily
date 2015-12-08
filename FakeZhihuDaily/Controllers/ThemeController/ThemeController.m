@@ -17,6 +17,7 @@
 #import "ZhihuClient.h"
 #import "Constants.h"
 #import "Story.h"
+#import "ContentController.h"
 
 static NSString * const kThemeCellID = @"ThemeCellID";
 const CGFloat kLockDelta = -95.0;
@@ -24,6 +25,9 @@ const CGFloat kLockDelta = -95.0;
 @interface ThemeController () <ParallaxHeaderViewDelegate>
 
 @property (nonatomic, strong) NSArray *stories;
+@property (nonatomic, strong) NSMutableArray *contentControllers;
+
+@property (nonatomic, assign) BOOL updated;
 
 @end
 
@@ -31,18 +35,7 @@ const CGFloat kLockDelta = -95.0;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-//    
-//    UIImageView *navHeaderView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 64)];
-//    navHeaderView.image = [UIImage new];
-//    navHeaderView.backgroundColor = [UIColor flatBlackColor];
-//    navHeaderView.contentMode = UIViewContentModeScaleAspectFill;
-//    navHeaderView.clipsToBounds = YES;
-//    
-//    
-//    ParallaxHeaderView *parallaxHeader = [ParallaxHeaderView parallaxThemeHeaderWithSubview:navHeaderView image:[UIImage new] forSize:navHeaderView.frame.size];
-//    parallaxHeader.delegate = self;
-    
-//    self.tableView.tableHeaderView = parallaxHeader;
+
     [self setParallaxHeaderWithImage:[self getBlackImage]];
     self.tableView.contentInset = UIEdgeInsetsMake(-64, 0, 0, 0);
     self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
@@ -51,8 +44,13 @@ const CGFloat kLockDelta = -95.0;
     
     [self.navigationController.navigationBar lt_setBackgourndColor:[UIColor clearColor]];
     [self.navigationController.navigationBar setShadowImage:[UIImage new]];
-    self.title = @"主题日报";
+    self.title = _theme.name;
     self.navigationController.navigationBar.titleTextAttributes = @{NSForegroundColorAttributeName : [UIColor whiteColor]};
+    
+    UIBarButtonItem *leftBarButton = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"menu"] style:UIBarButtonItemStylePlain target:self action:@selector(leftBarItemTapped:)];
+    leftBarButton.tintColor = [UIColor whiteColor];
+    self.navigationItem.leftBarButtonItem = leftBarButton;
+    
     
 }
 
@@ -79,9 +77,6 @@ const CGFloat kLockDelta = -95.0;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (_stories == nil) {
-        return  0;
-    }
     return _stories.count;
 }
 
@@ -97,6 +92,18 @@ const CGFloat kLockDelta = -95.0;
 }
 
 #pragma mark - TableView Delegate
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (_contentControllers[indexPath.row] == [NSNull null]) {
+        Story *story = [_stories objectAtIndex:indexPath.row];
+        story.hasRead = YES;
+
+        ContentController *contentController = [[ContentController alloc] init];
+        contentController.story = story;
+        [_contentControllers replaceObjectAtIndex:indexPath.row withObject:contentController];
+    }
+    [self.navigationController pushViewController:_contentControllers[indexPath.row] animated:YES];
+}
+#pragma mark - ScrollView Delegate
 - (void)scrollViewDidScroll:(UIScrollView *)scrollView {
     ParallaxHeaderView *headerView = (ParallaxHeaderView *)self.tableView.tableHeaderView;
     [headerView layoutParallaxThemeHeaderForScrollViewOffset:scrollView.contentOffset];
@@ -114,6 +121,10 @@ const CGFloat kLockDelta = -95.0;
 
 // gettting theme stories
 - (void)getThemeStories {
+    if (self.updated) {
+        [self.tableView reloadData];
+        return;
+    }
     ZhihuClient *sharedClient = [ZhihuClient sharedClient];
     
     NSString *themeStoriesURL = [NSString stringWithFormat:kThemeStories, (long)_theme.themeID];
@@ -123,6 +134,11 @@ const CGFloat kLockDelta = -95.0;
                          NSArray *jsonArray = responseObject[@"stories"];
                          self.stories = [Story modelArrayWithJSONArray:jsonArray];
                          
+                         self.contentControllers = [NSMutableArray arrayWithCapacity:_stories.count];
+                         for (int i=0; i<_stories.count; i++) {
+                             [_contentControllers addObject:[NSNull null]];
+                         }
+                         self.updated = YES;
                          NSString *bgImageURLString = responseObject[@"background"];
                          [[SDWebImageManager sharedManager] downloadImageWithURL:[NSURL URLWithString:bgImageURLString]
                      options:0
@@ -162,5 +178,11 @@ const CGFloat kLockDelta = -95.0;
     UIGraphicsEndImageContext();
     
     return image;
+}
+
+#pragma mark - Button and BarItemActions 
+
+- (void)leftBarItemTapped:(UIBarButtonItem *)leftBarButton {
+    [self.mm_drawerController toggleDrawerSide:MMDrawerSideLeft animated:YES completion:nil];
 }
 @end

@@ -106,8 +106,6 @@
     } else {
         _titleLabel.textColor = [UIColor blackColor];
     }
-    // 暂时没从API重找到这一字段，先隐藏
-    _categoryLabel.hidden = YES;
 }
 
 #pragma mark - Private
@@ -121,7 +119,7 @@
         
         make.top.equalTo(@(marginLength));
         make.right.equalTo(self.contentView).with.offset(-marginLength);
-        make.bottom.equalTo(self.contentView).with.offset(-marginLength);
+        make.bottom.equalTo(_separateLine.mas_top).with.offset(-marginLength);
     }];
     
     [_tagLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -134,7 +132,12 @@
     [_titleLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.top.equalTo(_titleImageView);
         make.left.equalTo(self.contentView).with.offset(marginLength);
-        make.right.equalTo(_titleImageView.mas_left).with.offset(-marginLength);
+        if (_titleImageView.hidden) {
+            make.right.equalTo(self.titleImageView.mas_right);
+        }
+        else {
+            make.right.equalTo(_titleImageView.mas_left).with.offset(-marginLength);
+        }
     }];
     
     [_categoryLabel mas_makeConstraints:^(MASConstraintMaker *make) {

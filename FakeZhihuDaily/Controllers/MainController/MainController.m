@@ -37,8 +37,8 @@ static NSString * const kMainCellID = @"MainCell";
 @property (nonatomic, strong) NSArray           *topStories;
 @property (nonatomic, assign) BOOL              updated;
 
-//@property (nonatomic, copy) NSString          *launchImageText;
-//@property (nonatomic, strong) UIImage           *launchImage;
+@property (nonatomic, strong) NSMutableArray    *contentControllers;
+@property (nonatomic, strong) NSMutableArray    *topContentControllers;
 
 @end
 
@@ -72,8 +72,6 @@ static NSString * const kMainCellID = @"MainCell";
     // 设置引导界面
     [self setupLaunchView];
     
-    // 添加通知
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(receivedLauchImageDownloadedNotification:) name:kLaunchImageDownloaded object:nil];
 }
 
 - (void)viewWillAppear:(BOOL)animated {
@@ -136,14 +134,29 @@ static NSString * const kMainCellID = @"MainCell";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    ContentController *contentController = [[ContentController alloc] init];
+    if ([_contentControllers objectAtIndex:indexPath.row] == [NSNull null]) {
+        ContentController *contentController = [[ContentController alloc] init];
+        contentController.story = _stories[indexPath.row];
+        [_contentControllers replaceObjectAtIndex:indexPath.row withObject:contentController];
+    }
     [[_stories objectAtIndex:indexPath.row] setHasRead:YES];
     
-    [self.navigationController pushViewController:contentController animated:YES];
+    [self.navigationController pushViewController:_contentControllers[indexPath.row] animated:YES];
 }
 #pragma mark - SDCycleImageView Delegate
 - (void)cycleScrollView:(SDCycleScrollView *)cycleScrollView didSelectItemAtIndex:(NSInteger)index {
     NSLog(@"第%ld张图片被点击了.", (long)index);
+    
+    if (_topContentControllers[index] == [NSNull null]) {
+        Story *topStory = [_topStories objectAtIndex:index];
+        topStory.hasRead = YES;
+        
+        ContentController *topContentController = [[ContentController alloc] init];
+        topContentController.story = topStory;
+        [_topContentControllers replaceObjectAtIndex:index withObject:topContentController];
+    }
+    
+    [self.navigationController pushViewController:_topContentControllers[index] animated:YES];
 }
 
 #pragma mark - ParallaxHeader Delegate
@@ -254,6 +267,17 @@ static NSString * const kMainCellID = @"MainCell";
                          
                          self.stories = [Story modelArrayWithJSONArray:lastestArray];
                          self.topStories = [Story modelArrayWithJSONArray:topJsonArray];
+                         
+                         self.contentControllers = [NSMutableArray arrayWithCapacity:_stories.count];
+                         self.topContentControllers = [NSMutableArray arrayWithCapacity:_topStories.count];
+                         
+                         for (int i=0; i<_stories.count; i++) {
+                             [_contentControllers addObject:[NSNull null]];
+                         }
+                         for (int i=0; i<_topStories.count; i++) {
+                             [_topContentControllers addObject:[NSNull null]];
+                         }
+                         
                          dispatch_group_leave(group);
                      }failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                          NSLog(@"Error : %@", error);

@@ -19,6 +19,7 @@ NSString const *UIButton_badgeBGColor   = @"BadgeBGColor";
 NSString const *UIButton_badgePadding   = @"BadgePadding";
 NSString const *UIButton_badgeOriginX   = @"BadgeOriginX";
 NSString const *UIButton_badgeOriginY   = @"BadgeOriginY";
+NSString const *UIButton_selected       = @"BadgeButtonSelected";
 
 NSString const *UIButton_shouldHideAtZero       = @"UIButton_shouldHideAtZero";
 NSString const *UIButton_shouldBouceAtChange    = @"UIButton_shouldBoundceAtChange";
@@ -40,7 +41,7 @@ NSString const *UIButton_shouldBouceAtChange    = @"UIButton_shouldBoundceAtChan
 - (void)badgeInit {
     self.bgColor = [UIColor colorWithRed:1/255.0 green:131/255.0 blue:209/255.0 alpha:1.0];
     self.textColor = [UIColor flatGrayColor];
-    self.badgeFont = [UIFont systemFontOfSize:8.f];
+    self.badgeFont = [UIFont systemFontOfSize:10.f];
     self.badgePadding = 8.f;
     self.badgeOriginX = self.frame.size.width - 10.f;
     self.badgeOriginY = -2;
@@ -103,6 +104,15 @@ NSString const *UIButton_shouldBouceAtChange    = @"UIButton_shouldBoundceAtChan
     return objc_getAssociatedObject(self, &UIButton_badgeValueKey);
 }
 
+- (void)updateBadgeValueWithAnimation {
+    CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"transform.scale"];
+    [animation setFromValue:@1.5];
+    [animation setToValue:@1.0];
+    [animation setDuration:0.3];
+    [animation setTimingFunction:[CAMediaTimingFunction functionWithControlPoints:.4f :1.3f :1.f :1.f]];
+    [self.badge.layer addAnimation:animation forKey:@"BadgeAnimation"];
+}
+
 - (void)setBadgeValue:(NSString *)badgeValue {
     objc_setAssociatedObject(self, &UIButton_badgeValueKey, badgeValue, OBJC_ASSOCIATION_COPY_NONATOMIC);
     
@@ -119,6 +129,7 @@ NSString const *UIButton_shouldBouceAtChange    = @"UIButton_shouldBoundceAtChan
         self.badge.text = self.badgeValue;
     } else {
         self.badge.text = self.badgeValue;
+        [self updateBadgeValueWithAnimation];
     }
 }
 
@@ -203,6 +214,15 @@ NSString const *UIButton_shouldBouceAtChange    = @"UIButton_shouldBoundceAtChan
 - (void)setShouldHideBageAtZero:(BOOL)shouldHideBageAtZero {
     NSNumber *number = [NSNumber numberWithBool:shouldHideBageAtZero];
     objc_setAssociatedObject(self, &UIButton_shouldHideAtZero, number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
+}
+
+- (BOOL)buttonSelected {
+    return [objc_getAssociatedObject(self, &UIButton_selected) boolValue];
+}
+
+- (void)setButtonSelected:(BOOL)buttonSelected {
+    NSNumber *number = [NSNumber numberWithBool:buttonSelected];
+    objc_setAssociatedObject(self, &UIButton_selected, number, OBJC_ASSOCIATION_RETAIN_NONATOMIC);
 }
 
 

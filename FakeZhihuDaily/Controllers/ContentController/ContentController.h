@@ -8,6 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
+#import "StoryDetail.h"
+#import "Story.h"
+
 @interface ContentController : UIViewController
+
+@property (nonatomic, strong) Story       *story;
 
 @end
